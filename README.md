@@ -11,7 +11,7 @@ Leistungsbewertung in der Schule - XP basiert (OSZIMT)
 [LevelUP.pdf](https://github.com/Brianquant/LevelUP/files/13348316/LevelUP.pdf)
 ## Auswahl der Technologie:
 -	Frontend: HTML, CSS, Vanilla JS
--	Datenbank: (MongoDB)
+-	Datenbank: MySQL
 -	Webserver: Apache
 -	Backend: NodeJS
 -	Hosten auf github pages
