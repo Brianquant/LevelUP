@@ -17,4 +17,4 @@ Leistungsbewertung in der Schule - XP basiert (OSZIMT)
 -	Hosten auf github pages
 -	CI/CD über GitHub mit Docker
 ## Datenbank ER-Modell:
-![DatenbankPlanung](https://github.com/Brianquant/LevelUP/assets/91448422/747178be-7b49-4d25-9ce0-b6bd6408c5fe)
+![DatenbankPlanung](https://github.com/Brianquant/LevelUP/assets/91448422/bfd63f5a-8e11-4c1c-a39d-bfc4f75f48dd)
