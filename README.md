@@ -7,6 +7,8 @@ Leistungsbewertung in der Schule - XP basiert (OSZIMT)
 -	Lootboxen (Abhängig von Zensuren, Level und Anwesenheit).
 -	Benutzerdatenbank
 -	Highscore board.
+## Wireframe der Webanwendung:
+[LevelUP.pdf](https://github.com/Brianquant/LevelUP/files/13348316/LevelUP.pdf)
 ## Auswahl der Technologie:
 -	Frontend: HTML, CSS, Vanilla JS
 -	Datenbank: (MongoDB)
