@@ -14,3 +14,5 @@ Leistungsbewertung in der Schule - XP basiert (OSZIMT)
 -	Backend: NodeJS
 -	Hosten auf github pages
 -	CI/CD über GitHub mit Docker
+## Datenbank ER-Modell:
+![DatenbankPlanung](https://github.com/Brianquant/LevelUP/assets/91448422/747178be-7b49-4d25-9ce0-b6bd6408c5fe)
