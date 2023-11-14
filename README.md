@@ -18,4 +18,4 @@ Leistungsbewertung in der Schule - XP basiert (OSZIMT)
 -	CI/CD über GitHub mit Docker
 
 ## Datenbank ER-Modell:
-![DatenbankPlanung](https://github.com/Brianquant/LevelUP/assets/91448422/ff941e39-22dd-4455-a0c2-6967cc6cc3a5)
+![DatenbankPlanung](https://github.com/Brianquant/LevelUP/assets/91448422/d82ca1fe-d10e-4f20-bb24-f6d9e86b050f)
