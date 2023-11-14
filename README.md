@@ -8,7 +8,7 @@ Leistungsbewertung in der Schule - XP basiert (OSZIMT)
 -	Benutzerdatenbank
 -	Highscore board.
 ## Wireframe der Webanwendung:
-[LevelUP.pdf](https://github.com/Brianquant/LevelUP/LevelUP.pdf)
+[LevelUP.pdf](https://github.com/Brianquant/LevelUP/files/13348480/LevelUP.pdf)
 ## Auswahl der Technologie:
 -	Frontend: HTML, CSS, Vanilla JS
 -	Datenbank: MySQL
@@ -18,4 +18,4 @@ Leistungsbewertung in der Schule - XP basiert (OSZIMT)
 -	CI/CD über GitHub mit Docker
 
 ## Datenbank ER-Modell:
-![DatenbankPlanung](https://github.com/Brianquant/LevelUP/DatenbankPlanung.png)
+![DatenbankPlanung](https://github.com/Brianquant/LevelUP/assets/91448422/ea0b1703-6e82-43a7-9de6-c02ab1675abe)
