@@ -6,7 +6,7 @@ Was wird benötigt:
 -	XP bei Abschluss von Lerninhalten (Bonus EXP bei guten Leistungen).
 -	Lootboxen (Abhängig von Zensuren, Level und Anwesenheit).
 -	Benutzerdatenbank
--	Highscore board
+-	Highscore board.
 Auswahl der Technologie:
 -	Frontend: HTML, CSS, Vanilla JS
 -	Datenbank: (MongoDB)
