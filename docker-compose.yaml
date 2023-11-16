@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  # nodejs:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: nodejs_app
+  #   ports:
+  #     - "3000:3000"
+  #   working_dir: /app
+  #   command: ["npm", "start"]
+  
+  app:
+    build: ./build/app
+    image: level-up-app
+    ports:
+      - "9090:80"
+    volumes: 
+      - ./src:/usr/share/nginx/html
+
+  mysql:
+    image: level-up-mysql
+    build: ./build/mysql
+    container_name: levelup-database
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    volumes:
+      - ./build/mysql/dump/LevelUP_TestData.sql:/docker-entrypoint-initdb.d/LevelUP_TestData.sql
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u root --password=$MYSQL_ROOT_PASSWORD
+      timeout: 50s
+      retries: 10
