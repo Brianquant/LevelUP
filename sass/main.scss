@@ -1,0 +1,108 @@
+//custom variables
+
+//color-scheme
+$primary: #004bc0;
+$secondary: #6d1fd4;
+$tertiary: #d569f6;
+$quaternary: #00f3fc;
+$dark: #040026;
+$light: #ffbcff;
+
+
+.navbar-brand {
+  font-family: 'Press Start 2P';
+}
+
+.navbar-nav{
+  gap: 15px;
+}
+
+.navbar-nav .nav-link {
+  font-family: 'Press Start 2P';
+  font-size: 14px;
+}
+
+.navbar-nav .nav-item a:hover {
+  color: $tertiary !important;
+}
+
+.navbar-nav .nav-item .nav-link.active {
+  border-bottom: 2px solid $tertiary;
+
+}
+
+
+body h1{
+    font-family: 'ArcadeClassic';
+    text-shadow: -1px 0 0 #fdff2a,
+    -2px 0 0 #df4a42,
+    1px 0 0 #91fcfe,
+    2px 0 0 #4405fc;
+    font-size: 50px;
+    letter-spacing: 3px;
+}
+body th{
+    font-size: 20px;
+    font-family: 'DS-Digital', sans-serif;
+    color: $tertiary;
+}
+  
+  .transparent-table thead th{
+    background: transparent;
+    border: none;
+    color: $tertiary;
+    
+  }
+  .transparent-table tbody td {
+    background: transparent;
+    border: none;
+    color: $light;
+    font-family: 'DS-Digital', sans-serif;
+  }
+
+  label{
+    color: $secondary;
+  }
+
+  .btn{
+    color: $secondary !important;
+  }
+
+  .dropdown-menu a {
+    color: $secondary;
+  }
+
+  .dropdown-menu a:hover {
+    background-color: $dark;
+    color: $tertiary;
+  }
+  
+
+
+
+  .pagination{
+    justify-content: center;
+    gap: 100%;
+  }
+
+  .pagination button{
+    background-color: transparent;
+    border: none;
+    color: $secondary;
+    font-family: 'Press Start 2P';
+    font-size: 30px;
+  }
+
+  button:disabled{
+    color: hsla(266, 74%, 48%, 0.25)!important;
+  }
+
+  button:hover{
+    color: $tertiary;
+  }
+
+
+
+
+//import bootstrap
+@import '../node_modules/bootstrap/scss/bootstrap';

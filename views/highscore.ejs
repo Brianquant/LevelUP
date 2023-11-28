@@ -1,0 +1,44 @@
+    <style>
+      body{
+        font-family: 'ArcadeClassic';
+      }
+
+      
+    </style>
+
+    <h1 class="text-center my-5 mx-auto w-50 text-white">Highscore-Board</h1>
+    <div id="container" class="w-50 m-auto">
+    <form action="/" method="post">
+      <label for="kursSelect">Pick Course:</label>
+    <div class="btn-group">
+      <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span id="selectedCourse"><%= selectedKurs%></span>
+      </button>
+      <div class="dropdown-menu bg-dark" id="kursSelect">
+        <a class="dropdown-item">Alle</a>
+        <% kursData.forEach(function(row) { %>
+          <a class="dropdown-item"><%= row.bezeichnung %></a>
+        <% }); %>
+      </div>
+    </div>
+    </form>
+
+    <table class="content table table-dark transparent-table text-center center mt-3" >
+        <thead>
+          <tr>
+            <th class="col-1">RANK</th>
+            <th class="col-2">NAME</th>
+            <th class="col-1">EXP</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% var position = 1; %>
+            <% userData.forEach(function(row) { %>
+                <tr>
+                  <td><%= position++ %>.</td>
+                  <td><%= row.vorname %> <%= row.name %></td>
+                  <td><%= row.exp %></td>
+                </tr>
+              <% }); %>
+        </tbody>
+      </table>
