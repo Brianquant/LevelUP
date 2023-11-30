@@ -1,29 +1,38 @@
-    <style>
-      body{
-        font-family: 'ArcadeClassic';
-      }
+<script src="/js/highscore.js"></script>
+<style>
+div#container{
+  max-width: 1000px;
+  padding: 0 20px 0 20px;
+}
+.pagination-buttons{
+    display: flex;
+    justify-content: space-between;
+  }
 
-      
-    </style>
+  .pagination-buttons button{
+    font-family: 'Press Start 2P';
+    font-size: 2rem;
+  }
+</style>
 
-    <h1 class="text-center my-5 mx-auto w-50 text-white">Highscore-Board</h1>
-    <div id="container" class="w-50 m-auto">
-    <form action="/" method="post">
+    <h1 class="mx-auto">Highscore-Board</h1>
+    <div id="container" class="mx-auto">
+    <form action="/" method="post" style="text-align: start;">
       <label for="kursSelect">Pick Course:</label>
     <div class="btn-group">
-      <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span id="selectedCourse"><%= selectedKurs%></span>
       </button>
-      <div class="dropdown-menu bg-dark" id="kursSelect">
-        <a class="dropdown-item">Alle</a>
+      <ul class="dropdown-menu bg-dark" id="kursSelect">
+        <li><a class="dropdown-item">Alle</a></li>
         <% kursData.forEach(function(row) { %>
-          <a class="dropdown-item"><%= row.bezeichnung %></a>
+          <li><a class="dropdown-item"><%= row.bezeichnung %></a></li>
         <% }); %>
-      </div>
+        </ul>
     </div>
     </form>
 
-    <table class="content table table-dark transparent-table text-center center mt-3" >
+    <table class="content table text-center center mx-auto" >
         <thead>
           <tr>
             <th class="col-1">RANK</th>

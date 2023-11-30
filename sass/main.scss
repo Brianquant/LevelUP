@@ -1,104 +1,181 @@
-//custom variables
+@import "../node_modules/bootstrap/scss/functions";
+
+body, html{
+  height: 100%;
+}
+
+//fonts
+$font-digi: 'DS-Digital';
+$font-Press2: 'Press Start 2P';
+$font-Arcade: 'ArcadeClassic';
+
+$font-family-base: $font-Arcade;
 
 //color-scheme
-$primary: #004bc0;
-$secondary: #6d1fd4;
-$tertiary: #d569f6;
-$quaternary: #00f3fc;
+$primary: #6d1fd4;
+$secondary: #d569f6;
+$blue: #004bc0;
+$light-blue: #00f3fc;
 $dark: #040026;
 $light: #ffbcff;
 
+$success:       green;
+$info:          cyan;
+$warning:       yellow;
+$danger:        red;
+// scss-docs-end theme-color-variables
 
-.navbar-brand {
-  font-family: 'Press Start 2P';
+// scss-docs-start theme-colors-map
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
+) !default;
+
+$body-bg: $dark;
+$body-color: white;
+$input-group-addon-bg: $primary;
+
+//input
+$input-border-color: $primary;
+$input-color: $light;
+$input-placeholder-color: rgb($light, 50%);
+$border-radius: 0px;
+
+//navbar
+$navbar-dark-hover-color: $secondary;
+
+nav.navbar.navbar-expand-lg.navbar-dark.bg-primary{
+  padding: 0px;
+  margin-bottom: 3rem;
+  font-family: $font-Press2;
 }
 
-.navbar-nav{
-  gap: 15px;
-}
-
-.navbar-nav .nav-link {
-  font-family: 'Press Start 2P';
-  font-size: 14px;
-}
-
-.navbar-nav .nav-item a:hover {
-  color: $tertiary !important;
-}
 
 .navbar-nav .nav-item .nav-link.active {
-  border-bottom: 2px solid $tertiary;
+  border-bottom: 2px solid $secondary;
+  display: inline-block;
 
 }
 
+.navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {
+  color: $navbar-dark-hover-color;
+}
+$nav-tabs-link-active-color: $secondary;
 
-body h1{
-    font-family: 'ArcadeClassic';
+//heading
+$headings-color: white;
+
+h3, .h3, h2, .h2, h1, .h1{
     text-shadow: -1px 0 0 #fdff2a,
     -2px 0 0 #df4a42,
     1px 0 0 #91fcfe,
     2px 0 0 #4405fc;
-    font-size: 50px;
     letter-spacing: 3px;
 }
-body th{
-    font-size: 20px;
-    font-family: 'DS-Digital', sans-serif;
-    color: $tertiary;
+
+//table
+$table-border-factor: 0;
+$table-color:$light;
+$table-border-width: 0;
+
+table{
+  font-family: $font-digi;
 }
   
-  .transparent-table thead th{
-    background: transparent;
-    border: none;
-    color: $tertiary;
-    
+  th{
+    color: $secondary!important;
+    font-size: larger;
   }
-  .transparent-table tbody td {
-    background: transparent;
-    border: none;
-    color: $light;
-    font-family: 'DS-Digital', sans-serif;
-  }
+
 
   label{
-    color: $secondary;
+    color: $primary;
   }
 
-  .btn{
-    color: $secondary !important;
-  }
+  //button
+  $dropdown-link-color: $primary;
+  $dropdown-link-hover-color: $secondary;
+  $dropdown-link-hover-bg: $dark;
+  $btn-color: $primary;
+  $btn-font-family: $font-Press2 !important;
+  $btn-border-width: 0px;
 
-  .dropdown-menu a {
-    color: $secondary;
-  }
 
-  .dropdown-menu a:hover {
-    background-color: $dark;
-    color: $tertiary;
+
+  $outline-width: 4px;
+  $shadow-width: 4px;
+  @each $color, $value in $theme-colors {
+    .btn-#{$color} {
+    $button-color: $value;    
+    position: relative;
+    box-shadow: inset -4px -4px 0px 0px shade-color($button-color, 15%);
+  
+  &:hover,
+  &:focus {
+  box-shadow: inset (-$shadow-width*1.2) (-$shadow-width*1.2) 0px 0px shade-color($button-color, 25%);
   }
   
+  &:active {
+  box-shadow: inset $shadow-width $shadow-width 0px 0px shade-color($button-color, 40%);
+  }
+  
+  &:before,
+  &:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-sizing: content-box;
+  }
+  
+  &:before {
+  top: -$outline-width;
+  left: 0;
+  border-top: $outline-width shade-color($button-color, 50%) solid;
+  border-bottom: $outline-width shade-color($button-color, 50%) solid;
+  }
+  
+  &:after {
+  left: -$outline-width;
+  top: 0;
+  border-left: $outline-width shade-color($button-color, 50%) solid;
+  border-right: $outline-width shade-color($button-color, 50%) solid;
+  }
+  }
+}
 
+input[type="file"]::file-selector-button {
+  background-color: $primary;
+}
 
-
-  .pagination{
-    justify-content: center;
-    gap: 100%;
+  .btn-check:checked+.btn, :not(.btn-check)+.btn:active, .btn:first-child:active, .btn.active, .btn.show {
+    color: $btn-color !important;
+  }
+  .btn-check:focus+.btn, .btn:focus {
+    box-shadow: none;
+  }
+  .btn:hover {
+    color: $dropdown-link-hover-color !important;
   }
 
-  .pagination button{
-    background-color: transparent;
-    border: none;
-    color: $secondary;
-    font-family: 'Press Start 2P';
-    font-size: 30px;
+  .dropdown-item{
+    user-select: none;
+    cursor: pointer;
   }
 
-  button:disabled{
-    color: hsla(266, 74%, 48%, 0.25)!important;
+  .pagination-buttons button:disabled{
+    color: rgba($primary, 50%) !important;
   }
 
-  button:hover{
-    color: $tertiary;
+
+  p{
+    color: $primary;
   }
 
 

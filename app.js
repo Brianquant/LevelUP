@@ -23,17 +23,21 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/js', express.static(__dirname + '/js'));
 app.use('/css', express.static(__dirname + '/css'));
 app.use('/assets', express.static(__dirname + '/assets'));
-app.use(expressLayouts);
 
 
-app.set('layout', 'layout'); // Set the default layout
 app.set('view engine', 'ejs');
-
-
+app.use(expressLayouts);
 
 //Get Index Page
 app.get('/', function(req, res) {
   res.render('index', {pageTitle: "Home"});
+});
+
+
+
+//Get Kurse Page
+app.get('/kurse', function(req, res) {
+  res.render('kurse', {pageTitle: "Kurse"});
 });
 
 //Get Highscore Page
@@ -69,6 +73,21 @@ app.get('/highscore', function (req, res) {
         });
       });
 
+});
+
+//Get Lootbox Page
+app.get('/lootbox', function(req, res) {
+  res.render('lootbox', {pageTitle: "Lootbox"});
+});
+
+//Get Inventar Page
+app.get('/inventar', function(req, res) {
+  res.render('inventar', {pageTitle: "Inventar"});
+});
+
+//Get Profil Page
+app.get('/profil', function(req, res) {
+  res.render('profil', {pageTitle: "Profil"});
 });
 
 app.listen(port, function () {
