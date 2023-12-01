@@ -1,6 +1,6 @@
 <script src="/js/highscore.js"></script>
 <style>
-div#container{
+.container{
   max-width: 1000px;
   padding: 0 20px 0 20px;
 }
@@ -14,9 +14,9 @@ div#container{
     font-size: 2rem;
   }
 </style>
-
-    <h1 class="mx-auto">Highscore-Board</h1>
-    <div id="container" class="mx-auto">
+<div class="mx-auto container" id="container">
+    <h1>Highscore-Board</h1>
+    
     <form action="/" method="post" style="text-align: start;">
       <label for="kursSelect">Pick Course:</label>
     <div class="btn-group">
@@ -51,3 +51,4 @@ div#container{
               <% }); %>
         </tbody>
       </table>
+</div>

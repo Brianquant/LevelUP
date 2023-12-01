@@ -7,6 +7,7 @@ var expressLayouts = require('express-ejs-layouts')
 var app = express();
 var port = 3000;
 
+//Datenbank Connection
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -19,14 +20,13 @@ con.connect(function (err) {
   console.log("Connected to MySQL database");
 });
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/js', express.static(__dirname + '/js'));
-app.use('/css', express.static(__dirname + '/css'));
-app.use('/assets', express.static(__dirname + '/assets'));
+app.use('/js', express.static(__dirname + '/js')); //allow access to js files
+app.use('/css', express.static(__dirname + '/css')); //allow access to css files
+app.use('/assets', express.static(__dirname + '/assets')); //allow access to assets files
 
 
 app.set('view engine', 'ejs');
-app.use(expressLayouts);
+app.use(expressLayouts); //Set layout
 
 //Get Index Page
 app.get('/', function(req, res) {

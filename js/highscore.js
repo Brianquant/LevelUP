@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
 
-  
+//Pagination
 document.addEventListener('DOMContentLoaded', function () {
   const content = document.querySelector('.content'); // Get the table
   const itemsPerPage = 10;
@@ -27,9 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
       updateButtonStates();
   }
 
-
-
-
+  //Pagination Buttons
   function createPageButtons() {
       const totalPages = Math.ceil(items.length / itemsPerPage);
 
@@ -45,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
       prevButton.addEventListener('click', () => {
           if (currentPage > 0) {
               currentPage--;
-              showPage(currentPage);
+              showPage(currentPage); //show previous page
           }
       });
       paginationDiv.appendChild(prevButton);
@@ -57,14 +55,15 @@ document.addEventListener('DOMContentLoaded', function () {
       nextButton.addEventListener('click', () => {
           if (currentPage < totalPages - 1) {
               currentPage++;
-              showPage(currentPage);
+              showPage(currentPage); //show next page
           }
       });
       paginationDiv.appendChild(nextButton);
       
-      updateButtonStates(); // Set initial button states
+      updateButtonStates();
   }
 
+  // Set initial button states
   function updateButtonStates() {
       const totalPages = Math.ceil(items.length / itemsPerPage);
       const prevButton = document.querySelector('.pagination-buttons button:first-child');
