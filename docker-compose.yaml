@@ -1,23 +1,10 @@
 version: '3'
 
 services:
-  # nodejs:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   container_name: nodejs_app
-  #   ports:
-  #     - "3000:3000"
-  #   working_dir: /app
-  #   command: ["npm", "start"]
-  
   app:
-    build: ./build/app
-    image: level-up-app
-    ports:
-      - "9090:80"
-    volumes: 
-      - ./src:/usr/share/nginx/html
+    build: ./build/app  # Assuming your Dockerfile is in the current directory
+    container_name: levelup-app
+    image: level-up-app  # Optional: Tag the built image
 
   mysql:
     image: level-up-mysql

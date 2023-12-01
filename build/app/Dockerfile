@@ -1,3 +1,13 @@
-FROM nginx:stable
-RUN apt-get update && apt upgrade -y
-# COPY --chown=www-data:www-data ./src /usr/share/nginx/html
+FROM node:16-alpine 
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./ 
+
+RUN npm install
+
+COPY src /usr/src/app
+
+EXPOSE 3000
+
+CMD ["node", "server.js"]
