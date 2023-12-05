@@ -43,9 +43,9 @@ app.get('/kurse', function(req, res) {
 //Get Highscore Page
 app.get('/highscore', function (req, res) {
   
-var selectedKurs = req.query.selectedKurs || 'Alle'; // Get the selected Kurs from the form
-if(selectedKurs === 'Alle'){
-var userQuery = "SELECT vorname, name, COALESCE(SUM(exp), 0) AS exp " +
+  var selectedKurs = req.query.selectedKurs || 'Alle'; // Get the selected Kurs from the form
+  if(selectedKurs === 'Alle'){
+    var userQuery = "SELECT vorname, name, COALESCE(SUM(exp), 0) AS exp " +
               "FROM test.user " +
               "LEFT JOIN test.user_kurs USING (user_id)" +
               "GROUP BY user_id ORDER BY exp DESC";
