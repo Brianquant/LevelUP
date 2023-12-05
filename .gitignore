@@ -1,0 +1,6 @@
+######################
+### SENSITIVE DATA ###
+######################
+.env
+.idea
+node_modules

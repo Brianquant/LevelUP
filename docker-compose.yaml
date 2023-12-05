@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  app:
+    build: ./build/app  # Assuming your Dockerfile is in the current directory
+    container_name: levelup-app
+    image: level-up-app  # Optional: Tag the built image
+
+  mysql:
+    image: level-up-mysql
+    build: ./build/mysql
+    container_name: levelup-database
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    volumes:
+      - ./build/mysql/dump/LevelUP_TestData.sql:/docker-entrypoint-initdb.d/LevelUP_TestData.sql
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u root --password=$MYSQL_ROOT_PASSWORD
+      timeout: 50s
+      retries: 10
