@@ -1,4 +1,4 @@
-FROM mysql:8.1
+FROM mysql:8.0
 
 ###############
 # SETUP MYSQL #
