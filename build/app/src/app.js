@@ -11,8 +11,8 @@ var port = 3000;
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "",
-  database: "test"
+  password: process.env.MYSQL_ROOT_PASSWORD,
+  database: process.env.MYSQL_DATABASE
 });
 
 con.connect(function (err) {
@@ -41,39 +41,39 @@ app.get('/kurse', function(req, res) {
 });
 
 //Get Highscore Page
-app.get('/highscore', function (req, res) {
+// app.get('/highscore', function (req, res) {
   
-  var selectedKurs = req.query.selectedKurs || 'Alle'; // Get the selected Kurs from the form
-  if(selectedKurs === 'Alle'){
-    var userQuery = "SELECT vorname, name, COALESCE(SUM(exp), 0) AS exp " +
-              "FROM test.user " +
-              "LEFT JOIN test.user_kurs USING (user_id)" +
-              "GROUP BY user_id ORDER BY exp DESC";
-  }else{
-    var userQuery = "SELECT vorname, name, COALESCE(SUM(exp), 0) AS exp " +
-              "FROM test.user " +
-              "LEFT JOIN test.user_kurs USING (user_id)" +
-              "LEFT JOIN test.kurs USING (kurs_id)" +
-              "WHERE bezeichnung = '" + selectedKurs +
-              "' GROUP BY user_id ORDER BY exp DESC";
-  }
+//   var selectedKurs = req.query.selectedKurs || 'Alle'; // Get the selected Kurs from the form
+//   if(selectedKurs === 'Alle'){
+//     var userQuery = "SELECT vorname, name, COALESCE(SUM(exp), 0) AS exp " +
+//               "FROM test.user " +
+//               "LEFT JOIN test.user_kurs USING (user_id)" +
+//               "GROUP BY user_id ORDER BY exp DESC";
+//   }else{
+//     var userQuery = "SELECT vorname, name, COALESCE(SUM(exp), 0) AS exp " +
+//               "FROM test.user " +
+//               "LEFT JOIN test.user_kurs USING (user_id)" +
+//               "LEFT JOIN test.kurs USING (kurs_id)" +
+//               "WHERE bezeichnung = '" + selectedKurs +
+//               "' GROUP BY user_id ORDER BY exp DESC";
+//   }
   
 
     
-    var kursQuery = "SELECT bezeichnung FROM test.kurs";
+//     var kursQuery = "SELECT bezeichnung FROM test.kurs";
 
-    con.query(userQuery, function (errUser, userRows) { // Datenbankabfrage Userscores
-        if (errUser) throw errUser;
+//     con.query(userQuery, function (errUser, userRows) { // Datenbankabfrage Userscores
+//         if (errUser) throw errUser;
     
-        con.query(kursQuery, function (errKurs, kursRows) { // Datenbankabfrage Kurse für Kursselect
-          if (errKurs) throw errKurs;
+//         con.query(kursQuery, function (errKurs, kursRows) { // Datenbankabfrage Kurse für Kursselect
+//           if (errKurs) throw errKurs;
           
-          // Render the 'highscore.ejs' template with both sets of data
-          res.render('highscore', { userData: userRows, kursData: kursRows, selectedKurs: selectedKurs, pageTitle: "Highscore-Board"});
-        });
-      });
+//           // Render the 'highscore.ejs' template with both sets of data
+//           res.render('highscore', { userData: userRows, kursData: kursRows, selectedKurs: selectedKurs, pageTitle: "Highscore-Board"});
+//         });
+//       });
 
-});
+// });
 
 //Get Lootbox Page
 app.get('/lootbox', function(req, res) {
