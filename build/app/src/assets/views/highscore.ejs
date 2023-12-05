@@ -1,0 +1,54 @@
+<script src="/js/highscore.js"></script>
+<style>
+.container{
+  max-width: 1000px;
+  padding: 0 20px 0 20px;
+}
+.pagination-buttons{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .pagination-buttons button{
+    font-family: 'Press Start 2P';
+    font-size: 2rem;
+  }
+</style>
+<div class="mx-auto container" id="container">
+    <h1>Highscore-Board</h1>
+    
+    <form action="/" method="post" style="text-align: start;">
+      <label for="kursSelect">Pick Course:</label>
+    <div class="btn-group">
+      <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span id="selectedCourse"><%= selectedKurs%></span>
+      </button>
+      <ul class="dropdown-menu bg-dark" id="kursSelect">
+        <li><a class="dropdown-item">Alle</a></li>
+        <% kursData.forEach(function(row) { %>
+          <li><a class="dropdown-item"><%= row.bezeichnung %></a></li>
+        <% }); %>
+        </ul>
+    </div>
+    </form>
+
+    <table class="content table text-center center mx-auto" >
+        <thead>
+          <tr>
+            <th class="col-1">RANK</th>
+            <th class="col-2">NAME</th>
+            <th class="col-1">EXP</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% var position = 1; %>
+            <% userData.forEach(function(row) { %>
+                <tr>
+                  <td><%= position++ %>.</td>
+                  <td><%= row.vorname %> <%= row.name %></td>
+                  <td><%= row.exp %></td>
+                </tr>
+              <% }); %>
+        </tbody>
+      </table>
+</div>

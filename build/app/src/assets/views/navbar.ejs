@@ -1,0 +1,55 @@
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid" style="align-items: flex-end; justify-content: flex-start">
+      <a class="navbar-brand" href="/">
+        <img id="logo" class="img-fluid" src="/assets/Logo.png" style="max-height: 45px;">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="align-self: center;"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                  <a class="nav-link" href="/">> Home</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="kurse">> Kurse</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="highscore">> Highscore</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="lootbox">> Lootbox</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="inventar">> Inventar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="profil">> Profil</a>
+          </li>
+          </ul>
+      </div>
+  </div>
+</nav>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var currentPage = window.location.pathname;
+
+        document.querySelectorAll(".nav-link").forEach((link) => {
+            var linkPath = link.getAttribute("href");
+
+            // Check if the current URL ends with the link's path
+            if (currentPage.endsWith(linkPath)) {
+                link.classList.add("active");
+                link.setAttribute("aria-current", "page");
+            } else {
+                link.classList.remove("active");
+                link.removeAttribute("aria-current");
+            }
+        });
+    });
+</script>
