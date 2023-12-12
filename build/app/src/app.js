@@ -46,21 +46,21 @@ app.get('/highscore', function (req, res) {
 var selectedKurs = req.query.selectedKurs || 'Alle'; // Get the selected Kurs from the form
 if(selectedKurs === 'Alle'){
 var userQuery = "SELECT vorname, name, COALESCE(SUM(exp), 0) AS exp " +
-              "FROM test.user " +
-              "LEFT JOIN test.user_kurs USING (user_id)" +
+              "FROM levelup.benutzer " +
+              "LEFT JOIN levelup.benutzer_kurs USING (user_id)" +
               "GROUP BY user_id ORDER BY exp DESC";
   }else{
     var userQuery = "SELECT vorname, name, COALESCE(SUM(exp), 0) AS exp " +
-              "FROM test.user " +
-              "LEFT JOIN test.user_kurs USING (user_id)" +
-              "LEFT JOIN test.kurs USING (kurs_id)" +
+              "FROM levelup.benutzer " +
+              "LEFT JOIN levelup.benutzer_kurs USING (user_id)" +
+              "LEFT JOIN levelup.kurs USING (kurs_id)" +
               "WHERE bezeichnung = '" + selectedKurs +
               "' GROUP BY user_id ORDER BY exp DESC";
   }
   
 
     
-    var kursQuery = "SELECT bezeichnung FROM test.kurs";
+    var kursQuery = "SELECT bezeichnung FROM levelup.kurs";
 
     con.query(userQuery, function (errUser, userRows) { // Datenbankabfrage Userscores
         if (errUser) throw errUser;
