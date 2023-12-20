@@ -48,7 +48,7 @@ app.use('/', authRoutes);
 
 //Get Index Page before authentication and authorization
 app.get('/', auth.isAuthenticated, (req, res, next) => {
-  res.render('index', {pageTitle: 'Home'});
+  res.render('index', {pageTitle: 'Home', isLoggedIn: true});
 });
 
 //Get Kurse Page
