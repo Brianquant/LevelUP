@@ -46,13 +46,14 @@ router.post('/login', async (req, res) => {
 });
 
 // Logout route
-router.post('/logout', (req, res) => {
+router.get('/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       console.error(err);
       return res.status(500).json({ message: 'Internal Server Error' });
     }
-    res.json({ message: 'Logout successful' });
+    //console.log('User successfully logged out');
+    res.redirect('/login'); // Redirect to the login page or another page after logout
   });
 });
 
