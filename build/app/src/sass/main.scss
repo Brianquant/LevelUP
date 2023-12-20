@@ -1,4 +1,4 @@
-@import "../node_modules/bootstrap/scss/functions";
+@import "../../../../node_modules/bootstrap/scss/functions";
 
 body, html{
   height: 100%;
@@ -46,9 +46,24 @@ $input-border-color: $primary;
 $input-color: $light;
 $input-placeholder-color: rgb($light, 50%);
 $border-radius: 0px;
+$input-focus-box-shadow: 0 0 10px $light;
+
+
+//modal
+$modal-header-border-color: $primary !important;
+$modal-footer-border-color: $primary !important;
+$modal-content-border-radius: 30px !important; 
+$modal-content-border-color: $primary !important;
+.modal-body{
+  text-align: start;
+}
+
+input:hover{
+  box-shadow: $input-focus-box-shadow;
+}
 
 //navbar
-$navbar-dark-hover-color: $secondary;
+$navbar-dark-hover-color: white;
 
 nav.navbar.navbar-expand-lg.navbar-dark.bg-primary{
   padding: 0px;
@@ -68,8 +83,16 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-primary{
 }
 $nav-tabs-link-active-color: $secondary;
 
+a:hover{
+  text-shadow: 0 0 10px $light;
+}
+a{
+  line-height: normal;
+}
+
 //heading
 $headings-color: white;
+$headings-margin-bottom: 20px;
 
 h3, .h3, h2, .h2, h1, .h1{
     text-shadow: -1px 0 0 #fdff2a,
@@ -88,64 +111,70 @@ table{
   font-family: $font-digi;
 }
   
-  th{
-    color: $secondary!important;
-    font-size: larger;
-  }
+th{
+  color: $secondary!important;
+  font-size: larger;
+}
 
 
-  label{
-    color: $primary;
-  }
+label{
+  color: $primary;
+}
 
-  //button
-  $dropdown-link-color: $primary;
-  $dropdown-link-hover-color: $secondary;
-  $dropdown-link-hover-bg: $dark;
-  $btn-color: $primary;
-  $btn-font-family: $font-Press2 !important;
-  $btn-border-width: 0px;
+//button
+$dropdown-link-color: $primary;
+$dropdown-link-hover-color: $secondary;
+$dropdown-link-hover-bg: $dark;
+$btn-color: $primary;
+$btn-font-family: $font-Press2 !important;
+$btn-border-width: 0px;
 
+.btn:hover{
+  text-shadow: 0 0 10px $light;
+  transform: scale(1.1);
+}
 
-
-  $outline-width: 4px;
-  $shadow-width: 4px;
-  @each $color, $value in $theme-colors {
-    .btn-#{$color} {
-    $button-color: $value;    
-    position: relative;
-    box-shadow: inset -4px -4px 0px 0px shade-color($button-color, 15%);
+$outline-width: 4px;
+$shadow-width: 4px;
+@each $color, $value in $theme-colors {
+  .btn-#{$color} {
+  $button-color: $value;    
+  position: relative;
+  box-shadow: inset -4px -4px 0px 0px shade-color($button-color, 15%);
   
   &:hover,
   &:focus {
-  box-shadow: inset (-$shadow-width*1.2) (-$shadow-width*1.2) 0px 0px shade-color($button-color, 25%);
+    box-shadow: inset (-$shadow-width*1.2) (-$shadow-width*1.2) 0px 0px shade-color($button-color, 25%);
+    color: white;
+    $button-color: $value;
   }
   
   &:active {
-  box-shadow: inset $shadow-width $shadow-width 0px 0px shade-color($button-color, 40%);
+    box-shadow: inset $shadow-width $shadow-width 0px 0px shade-color($button-color, 40%);
+
   }
   
   &:before,
   &:after {
   content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  box-sizing: content-box;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-sizing: content-box;
   }
   
   &:before {
-  top: -$outline-width;
-  left: 0;
-  border-top: $outline-width shade-color($button-color, 50%) solid;
-  border-bottom: $outline-width shade-color($button-color, 50%) solid;
+    top: -$outline-width;
+    left: 0;
+    border-top: $outline-width shade-color($button-color, 50%) solid;
+    border-bottom: $outline-width shade-color($button-color, 50%) solid;
   }
   
   &:after {
-  left: -$outline-width;
-  top: 0;
-  border-left: $outline-width shade-color($button-color, 50%) solid;
-  border-right: $outline-width shade-color($button-color, 50%) solid;
+    left: -$outline-width;
+    top: 0;
+    border-left: $outline-width shade-color($button-color, 50%) solid;
+    border-right: $outline-width shade-color($button-color, 50%) solid;
   }
   }
 }
@@ -178,8 +207,10 @@ input[type="file"]::file-selector-button {
     color: $primary;
   }
 
-
-
+  .container{
+    max-width: 100%;
+    padding: 20px!important;
+  }
 
 //import bootstrap
-@import '../node_modules/bootstrap/scss/bootstrap';
+@import '../../../../node_modules/bootstrap/scss/bootstrap';

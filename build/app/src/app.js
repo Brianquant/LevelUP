@@ -42,8 +42,7 @@ app.get('/kurse', function(req, res) {
 
 //Get Highscore Page
 app.get('/highscore', function (req, res) {
-  
-var selectedKurs = req.query.selectedKurs || 'Alle'; // Get the selected Kurs from the form
+var selectedKurs = req.query.sort || 'Alle'; // Get the selected Kurs from the form
 if(selectedKurs === 'Alle'){
 var userQuery = "SELECT vorname, name, COALESCE(SUM(exp), 0) AS exp " +
               "FROM levelup.benutzer " +
@@ -57,8 +56,6 @@ var userQuery = "SELECT vorname, name, COALESCE(SUM(exp), 0) AS exp " +
               "WHERE bezeichnung = '" + selectedKurs +
               "' GROUP BY user_id ORDER BY exp DESC";
   }
-  
-
     
     var kursQuery = "SELECT bezeichnung FROM levelup.kurs";
 
@@ -69,7 +66,7 @@ var userQuery = "SELECT vorname, name, COALESCE(SUM(exp), 0) AS exp " +
           if (errKurs) throw errKurs;
           
           // Render the 'highscore.ejs' template with both sets of data
-          res.render('highscore', { userData: userRows, kursData: kursRows, selectedKurs: selectedKurs, pageTitle: "Highscore-Board"});
+          res.render('highscore', { userData: userRows, kursData: kursRows, selectedKurs: selectedKurs, pageTitle: "Highscore-Board", sort: selectedKurs });
         });
       });
 
@@ -82,7 +79,24 @@ app.get('/lootbox', function(req, res) {
 
 //Get Inventar Page
 app.get('/inventar', function(req, res) {
-  res.render('inventar', {pageTitle: "Inventar"});
+  const sortParam = req.query.sort || null;
+  if(sortParam == 'Rarity') {
+    var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit " +
+              "FROM levelup.item ORDER BY seltenheit;";
+  }else if(sortParam == 'Name') {
+    var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit " +
+              "FROM levelup.item ORDER BY bezeichnung;";
+  }
+  else{
+    var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit " +
+              "FROM levelup.item;";
+  }
+  
+  con.query(itemQuery, function(err, result){
+    if(err) throw err;
+    res.render('inventar', {items: result, pageTitle: "Inventar", sort: sortParam});
+  });
+  
 });
 
 //Get Profil Page
