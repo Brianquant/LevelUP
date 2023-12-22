@@ -20,7 +20,7 @@ con.connect(function (err) {
   console.log("Connected to MySQL database");
 });
 
-app.use('/js', express.static(__dirname + '/js')); //allow access to js files
+app.use('/js', express.static(__dirname + '/js', { debug: true, 'Content-Type': 'application/javascript' })); //allow access to js files
 app.use('/css', express.static(__dirname + '/css')); //allow access to css files
 app.use('/assets', express.static(__dirname + '/assets')); //allow access to assets files
 
@@ -46,10 +46,17 @@ app.use(flash());
 const authRoutes = require('./routes/auth-routes');
 app.use('/', authRoutes);
 
+const signupRoutes = require('./routes/signup-routes');
+app.use('/', signupRoutes);
+
 //Get Index Page before authentication and authorization
 app.get('/', auth.isAuthenticated, (req, res, next) => {
-  res.render('index', {pageTitle: 'Home', isLoggedIn: true});
+  res.render('index', {pageTitle: 'Home'});
 });
+
+app.get('/signup', (req, res) => {
+  res.render('signup', {pageTitle: 'Registrieren'});
+})
 
 //Get Kurse Page
 app.get('/kurse', auth.isAuthenticated, (req, res, next) => {
