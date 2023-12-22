@@ -4,7 +4,7 @@ USE `levelup`;
 --
 -- Host: 127.0.0.1    Database: levelup
 -- ------------------------------------------------------
--- Server version	8.0.20
+-- Server version	8.0.35
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -28,9 +28,11 @@ CREATE TABLE `benutzer` (
   `user_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   `vorname` varchar(45) DEFAULT NULL,
-  `passwort` varchar(45) DEFAULT NULL,
+  `passwort` varchar(100) DEFAULT NULL,
   `klasse_id` int DEFAULT NULL,
+  `username` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
+  UNIQUE KEY `username_UNIQUE` (`username`),
   KEY `klasse_id2_idx` (`klasse_id`),
   CONSTRAINT `klasse_id2` FOREIGN KEY (`klasse_id`) REFERENCES `klasse` (`klasse_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -42,7 +44,7 @@ CREATE TABLE `benutzer` (
 
 LOCK TABLES `benutzer` WRITE;
 /*!40000 ALTER TABLE `benutzer` DISABLE KEYS */;
-INSERT INTO `benutzer` VALUES (1,'Mustermann','Max','12345',1),(2,'Doe','John','54321',1),(3,'Doe','Jane','12345',1),(4,'Lorem','Ipsum','54321',1),(5,'Smith','John','password123',1),(6,'Johnson','Alice','securepass',2),(7,'Doe','Bob','p@ssw0rd',1),(8,'Brown','Emma','qwerty',3),(9,'Miller','Daniel','letmein',2),(10,'Wilson','Olivia','123456',1),(11,'Moore','Liam','iloveyou',3),(12,'Anderson','Sophia','admin123',2),(13,'Jackson','Ethan','welcome1',1),(14,'White','Ava','pass123',3),(15,'Harris','Noah','testpass',2),(16,'Hall','Isabella','changeme',1),(17,'Lopez','Mia','password01',3),(18,'Young','James','newpass',2),(19,'King','Emily','userpass',1),(20,'Hill','Matthew','letsgo',3),(21,'Lee','Amelia','secret',2),(22,'Baker','Michael','mypassword',1),(23,'Green','Abigail','hello123',3),(24,'Turner','David','pass1234',2);
+INSERT INTO `benutzer` VALUES (1,'Mustermann','Max','12345',1,'max_musterman'),(2,'Doe','John','$2a$12$qWyBhmH68TRYle9DBlJWIuqLwVO6KKuhu/c34lbKjmq8wxWQ9O29i',1,'john_doe'),(3,'Doe','Jane','12345',1,'jane_doe'),(4,'Lorem','Ipsum','54321',1,'ipsum_lorem'),(5,'Smith','John','password123',1,'john_smith'),(6,'Johnson','Alice','securepass',2,'alice_johnson'),(7,'Doe','Bob','p@ssw0rd',1,'bob_doe'),(8,'Brown','Emma','qwerty',3,'emma_brown'),(9,'Miller','Daniel','letmein',2,'daniel_miller'),(10,'Wilson','Olivia','123456',1,'olivia_wilson'),(11,'Moore','Liam','iloveyou',3,'liam_moore'),(12,'Anderson','Sophia','admin123',2,'sophia_anderson'),(13,'Jackson','Ethan','welcome1',1,'ethan_jackson'),(14,'White','Ava','pass123',3,'ava_white'),(15,'Harris','Noah','testpass',2,'noah_harris'),(16,'Hall','Isabella','changeme',1,'isabella_hall'),(17,'Lopez','Mia','password01',3,'mia_lopez'),(18,'Young','James','newpass',2,'james_young'),(19,'King','Emily','userpass',1,'emily_king'),(20,'Hill','Matthew','letsgo',3,'matthew_hill'),(21,'Lee','Amelia','secret',2,'amelia_lee'),(22,'Baker','Michael','mypassword',1,'michael_baker'),(23,'Green','Abigail','hello123',3,'abigail_green'),(24,'Turner','David','pass1234',2,'david_turner');
 /*!40000 ALTER TABLE `benutzer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -280,6 +282,45 @@ LOCK TABLES `verspaetung` WRITE;
 /*!40000 ALTER TABLE `verspaetung` DISABLE KEYS */;
 /*!40000 ALTER TABLE `verspaetung` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'levelup'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `UpdateUsernames` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`locahost` PROCEDURE `UpdateUsernames`()
+BEGIN
+    UPDATE benutzer AS b1
+    SET username = 
+        CASE 
+            WHEN (
+                SELECT COUNT(*) 
+                FROM (SELECT * FROM benutzer) AS b2 
+                WHERE b2.username = CONCAT(LEFT(LOWER(IFNULL(b1.vorname, '')), 10), '_', LEFT(LOWER(IFNULL(b1.name, '')), 9))
+            ) > 0
+            THEN
+                CONCAT(LEFT(LOWER(IFNULL(b1.vorname, '')), 10), '_', LEFT(LOWER(IFNULL(b1.name, '')), 9), 
+                       (SELECT COUNT(*) FROM (SELECT * FROM benutzer) AS b2 WHERE b2.username LIKE 
+                           CONCAT(LEFT(LOWER(IFNULL(b1.vorname, '')), 10), '_', LEFT(LOWER(IFNULL(b1.name, '')), 9), '%')
+                       )
+                )
+            ELSE
+                CONCAT(LEFT(LOWER(IFNULL(b1.vorname, '')), 10), '_', LEFT(LOWER(IFNULL(b1.name, '')), 9))
+        END;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -290,4 +331,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-15 12:22:21
+-- Dump completed on 2023-12-22 14:58:58

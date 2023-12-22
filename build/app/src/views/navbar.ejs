@@ -38,12 +38,17 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var currentPage = window.location.pathname;
-        const button = document.getElementById('logoutButtonNav');
-            button.addEventListener('click', function(e) {
+        const logoutButton = document.getElementById('logoutButtonNav');
+            logoutButton.addEventListener('click', function(e) {
             window.location.href = '/logout';
         });
 
-        if (currentPage === '/login') {
+        const signupButton = document.getElementById('signupButtonNav');
+            signupButton.addEventListener('click', function(e) {
+            window.location.href = '/signup';
+        });
+
+        if (currentPage === '/login' || currentPage === '/signup') {
             document.getElementById('logoutButtonNav').disabled = true;
             document.getElementById('logoutButtonNav').style.display = 'none';
         } else {
