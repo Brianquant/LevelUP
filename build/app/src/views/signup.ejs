@@ -7,36 +7,48 @@
                     <div class="card" style="border-radius: 15px;">
                         <div class="card-body p-5">
                             <h2 class="text-uppercase text-center mb-5">Konto erstellen</h2>
-                            <form action="/signup" method="POST">
+                            <form action="/signup" method="POST" class="needs-validation" novalidate>
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="firstnameSignup" name="firstname" class="form-control form-control-lg" />
                                     <label class="form-label" for="firstnameSignup">Vorname</label>
+                                    <input type="text" id="firstnameSignup" name="firstname" class="form-control form-control-lg" required/>
+                                    <div class="invalid-feedback">
+                                        Bitte geben Sie ihren Vornamen ein.
+                                    </div>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="lastnameSignup" name="lastname" class="form-control form-control-lg" />
                                     <label class="form-label" for="lastnameSignup">Nachname</label>
+                                    <input type="text" id="lastnameSignup" name="lastname" class="form-control form-control-lg" required/>
+                                    <div class="invalid-feedback">
+                                        Bitte geben Sie ihren Nachnamen ein.
+                                    </div>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="gradeSignup" name="grade"  class="form-control form-control-lg" />
                                     <label class="form-label" for="gradeSignup">Klasse</label>
+                                    <input type="text" id="gradeSignup" name="grade"  class="form-control form-control-lg" required/>
+                                    <div class="invalid-feedback">
+                                        Bitte geben Sie ihre Klasse ein.
+                                    </div>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="password" id="passwordSignup" name="password" class="form-control form-control-lg" />
                                     <label class="form-label" for="passwordSignup">Passwort</label>
+                                    <input type="password" id="passwordSignup" name="password" class="form-control form-control-lg" required/>
+                                    <div class="invalid-feedback">
+                                        Die Passwörter stimmen nicht überein.
+                                    </div>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input type="password" id="passwordCheckSignup" name="passwordCheck" class="form-control form-control-lg" />
                                     <label class="form-label" for="passwordCheckSignup">Passwort wiederholen</label>
+                                    <input type="password" id="passwordCheckSignup" name="passwordCheck" class="form-control form-control-lg" required/>
                                 </div>
 
                                 <div class="form-check d-flex justify-content-center mb-5">
-                                    <input class="form-check-input me-2" type="checkbox" value="" id="termsOfUseSignup" />
+                                    <input class="form-check-input me-2" type="checkbox" value="" id="termsOfUseSignup" required/>
                                     <label class="form-check-label" for="termsOfUseSignup">
-                                        Ich stimme den <a href="#!" class="text-body"><u>Nutzungsbedingungen</u></a> zu
+                                        Ich  stimme  den  <a href="#!" class="text-body"><u>Nutzungsbedingungen</u></a>  zu
                                     </label>
                                 </div>
 

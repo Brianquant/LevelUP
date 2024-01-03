@@ -19,6 +19,7 @@ router.post('/login', async (req, res) => {
 
     // Fetch user from the database
     const [user] = await connection.query('SELECT * FROM benutzer WHERE username = ?', [username]);
+    console.log(user);
     
     // Close the connection
     connection.release();
