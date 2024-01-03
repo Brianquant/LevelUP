@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Authentication successful
                 window.location.href = '/'; // Redirect to the index page
             } else {
+                $('#login-username').addClass('is-invalid');
+                $('#login-pwd').addClass('is-invalid');
                 // Authentication failed
                 return response.json();
             }
