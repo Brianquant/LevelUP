@@ -35,7 +35,7 @@ CREATE TABLE `benutzer` (
   UNIQUE KEY `username_UNIQUE` (`username`),
   KEY `klasse_id2_idx` (`klasse_id`),
   CONSTRAINT `klasse_id2` FOREIGN KEY (`klasse_id`) REFERENCES `klasse` (`klasse_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -140,6 +140,7 @@ CREATE TABLE `klasse` (
   `klasse_id` int NOT NULL AUTO_INCREMENT,
   `bezeichnung` varchar(45) DEFAULT NULL,
   `klassenlehrer` varchar(45) DEFAULT NULL,
+  `secret` varchar(90) DEFAULT NULL,
   PRIMARY KEY (`klasse_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -150,7 +151,7 @@ CREATE TABLE `klasse` (
 
 LOCK TABLES `klasse` WRITE;
 /*!40000 ALTER TABLE `klasse` DISABLE KEYS */;
-INSERT INTO `klasse` VALUES (1,'FA-A-11','Fr. Glass-Becker'),(2,'FI-A-11','Herr. Bartel'),(3,'FS-A-11','Herr. Freese');
+INSERT INTO `klasse` VALUES (1,'FA-A-11','Fr. Glass-Becker','$2a$12$1o/nVTI5HxHHQYjoDn.pxeQUeWYU5UzMDE8Grcuadj/tFrQVFTqXO'),(2,'FI-A-11','Herr. Bartel','$2a$12$5XPheLxxrV/hM4s9pHmMCe6lwNPiCgbo1NU4SPgTDnMNMv6vvORSi'),(3,'FS-A-11','Herr. Freese','$2a$12$jrduMXM5e3vzpaCNWRDFTeZfG9bQdJMfv2Htu5bk/2/7LXBYBcFZS');
 /*!40000 ALTER TABLE `klasse` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -305,7 +306,7 @@ BEGIN
                 SELECT COUNT(*) 
                 FROM (SELECT * FROM benutzer) AS b2 
                 WHERE b2.username = CONCAT(LEFT(LOWER(IFNULL(b1.vorname, '')), 10), '_', LEFT(LOWER(IFNULL(b1.name, '')), 9))
-            ) > 0
+            ) > 1
             THEN
                 CONCAT(LEFT(LOWER(IFNULL(b1.vorname, '')), 10), '_', LEFT(LOWER(IFNULL(b1.name, '')), 9), 
                        (SELECT COUNT(*) FROM (SELECT * FROM benutzer) AS b2 WHERE b2.username LIKE 
@@ -331,4 +332,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-22 14:58:58
+-- Dump completed on 2024-01-04 10:49:57
