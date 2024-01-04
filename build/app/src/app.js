@@ -82,6 +82,10 @@ app.get('/profil', auth.isAuthenticated, (req, res, next) => {
   res.render('profil', {pageTitle: "Profil"});
 });
 
+app.get('/postsignup', (req, res) => {
+  res.render('postsignup', {pageTitle: 'Registrierung bestätigen'});
+});
+
 ////Authentication implementation end
 
 //Get Index Page before authentication and authorization
