@@ -3,5 +3,5 @@
 ######################
 .env
 .idea
-/build/app/node_modules
+./build/app/node_modules
 .DS_Store
