@@ -75,7 +75,7 @@ app.get('/postsignup', (req, res) => {
 ////Authentication implementation end
 
 //Get Highscore Page
-app.get('/highscore', function (req, res) {
+app.get('/highscore', auth.isAuthenticated, function (req, res) {
   var selectedKurs = req.query.sort || 'Alle'; // Get the selected Kurs from the form
   if(selectedKurs === 'Alle'){
   var userQuery = "SELECT vorname, name, COALESCE(SUM(exp), 0) AS exp " +
@@ -112,7 +112,7 @@ app.get('/highscore', function (req, res) {
   });
   
   //Get Inventar Page
-  app.get('/inventar', function(req, res) {
+  app.get('/inventar', auth.isAuthenticated, function(req, res) {
     const sortParam = req.query.sort || null;
     if(sortParam == 'Rarity') {
       var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit " +
