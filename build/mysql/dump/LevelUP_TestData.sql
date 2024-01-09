@@ -309,9 +309,9 @@ BEGIN
             ) > 1
             THEN
                 CONCAT(LEFT(LOWER(IFNULL(b1.vorname, '')), 10), '_', LEFT(LOWER(IFNULL(b1.name, '')), 9), 
-                       (SELECT COUNT(*) FROM (SELECT * FROM benutzer) AS b2 WHERE b2.username LIKE 
-                           CONCAT(LEFT(LOWER(IFNULL(b1.vorname, '')), 10), '_', LEFT(LOWER(IFNULL(b1.name, '')), 9), '%')
-                       )
+                      (SELECT COUNT(*) FROM (SELECT * FROM benutzer) AS b2 WHERE b2.username LIKE 
+                        CONCAT(LEFT(LOWER(IFNULL(b1.vorname, '')), 10), '_', LEFT(LOWER(IFNULL(b1.name, '')), 9), '%')
+                      )
                 )
             ELSE
                 CONCAT(LEFT(LOWER(IFNULL(b1.vorname, '')), 10), '_', LEFT(LOWER(IFNULL(b1.name, '')), 9))
