@@ -1,16 +1,3 @@
-//Kurs Select
-document.addEventListener('DOMContentLoaded', function () {
-    var dropdown = document.getElementById('kursSelect');
-
-    dropdown.addEventListener('click', function (event) {
-      if (event.target.classList.contains('dropdown-item')) {
-        var selectedKurs = event.target.innerText.trim();
-        window.location.href = '/highscore?selectedKurs=' + encodeURIComponent(selectedKurs);
-      }
-    });
-  });
-
-
 //Pagination
 document.addEventListener('DOMContentLoaded', function () {
   const content = document.querySelector('.content'); // Get the table

@@ -1,1 +1,65 @@
-<div class="text-center"><img src="/assets/work-in-progress.png"></div>
+<link href="css/inventar.min.css" rel="stylesheet">
+<link href="css/main.min.css" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="/js/inventar.js"></script>
+<h1>Inventar</h1>
+<div class="container">
+    <div class="dropdown">
+        <a class="btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Sortiere nach: <%= sort %>
+        </a>
+    
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="inventar?sort=Name">Name</a></li>
+            <li><a class="dropdown-item" href="inventar?sort=Rarity">Rarity</a></li>
+        </ul>
+    </div>
+    <div class="inventory">
+        <!--Filter-->
+        <% items.forEach(function(item) { %>
+            <div class="slot" data-item='<%- JSON.stringify(item).replace(/'/g, "&#39;") %>'>
+                <!-- Item Icon depending on rarity-->
+                <% if (item.seltenheit === 'Bronze') { %>
+                    <img src="/assets/bronze.png">
+                <% } %>
+                <% if (item.seltenheit === 'Silber') { %>
+                    <img src="/assets/silber.png">
+                <% } %>
+                <% if (item.seltenheit === 'Gold') { %>
+                    <img src="/assets/gold.png">
+                <% } %>
+                <% if (item.seltenheit === 'Diamant') { %>
+                    <img src="/assets/diamond.png">
+                <% } %>
+                <% if (item.seltenheit === 'Platin') { %>
+                    <img src="/assets/platin.png">
+                <% } %>
+                <span class="badge rounded-pill bg-primary position-absolute top-0 start-100 translate-middle">
+                    <!-- Anzahl Items --> 1
+                </span>
+                <h6><%= item.bezeichnung %></h6>
+
+            </div>
+        <% }); %>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="ItemInfo" tabindex="-1" aria-labelledby="ItemInfoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title fs-5" id="ItemInfoLabel">Modal title</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div id="item-details"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

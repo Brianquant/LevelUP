@@ -1,0 +1,27 @@
+@import 'main.scss';
+
+.container{
+    max-width: 1000px!important;
+    padding: 0 20px 0 20px;
+  }
+  .pagination-buttons{
+      display: flex;
+      justify-content: space-between;
+    }
+  
+    .pagination-buttons button{
+      font-family: 'Press Start 2P';
+      font-size: 2rem;
+    }
+
+form{
+    text-align: start;
+}
+
+.dropdown{
+  text-align: start;
+  margin-bottom: 20px;
+}
+
+//import bootstrap
+@import '../../../../node_modules/bootstrap/scss/bootstrap';
