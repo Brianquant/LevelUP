@@ -2,7 +2,7 @@ var express = require('express');
 var mysql = require('mysql2');
 var ejs = require('ejs');
 var bodyParser = require('body-parser');
-var expressLayouts = require('express-ejs-layouts')
+var expressLayouts = require('express-ejs-layouts');
 
 var app = express();
 var port = 3333;
@@ -20,7 +20,7 @@ con.connect(function (err) {
   console.log("Connected to MySQL database");
 });
 
-app.use('/js', express.static(__dirname + '/js')); //allow access to js files
+app.use('/js', express.static(__dirname + '/js', { debug: true, 'Content-Type': 'application/javascript' })); //allow access to js files
 app.use('/css', express.static(__dirname + '/css')); //allow access to css files
 app.use('/assets', express.static(__dirname + '/assets')); //allow access to assets files
 
@@ -28,12 +28,70 @@ app.use('/assets', express.static(__dirname + '/assets')); //allow access to ass
 app.set('view engine', 'ejs');
 app.use(expressLayouts); //Set layout
 
-//Get Index Page
-app.get('/', function(req, res) {
-  res.render('index', {pageTitle: "Home"});
+////Authentication implementation MVC -- made changes to the struckture. The rest of the code will be refactored at a later date.
+const session = require('express-session');
+const flash = require('express-flash');
+const auth = require('./middleware/auth-middleware');
+
+app.use(session({
+  secret: 'AbCdEf',
+  resave: false,
+  saveUninitialized: true,
+}));
+
+// Parse JSON request body
+app.use(express.json());
+app.use(flash());
+
+const authRoutes = require('./routes/auth-routes');
+app.use('/', authRoutes);
+
+const signupRoutes = require('./routes/signup-routes');
+app.use('/', signupRoutes);
+
+//Get Index Page before authentication and authorization
+app.get('/', auth.isAuthenticated, (req, res, next) => {
+  res.render('index', {pageTitle: 'Home'});
 });
 
+app.get('/signup', (req, res) => {
+  res.render('signup', {pageTitle: 'Registrieren'});
+})
 
+//Get Kurse Page
+app.get('/kurse', auth.isAuthenticated, (req, res, next) => {
+  res.render('kurse', {pageTitle: "Kurse"});
+});
+
+app.get('/highscore', auth.isAuthenticated, (req, res, next) => {
+  res.render('index', {pageTitle: 'Highscore'});
+});
+
+//Get Lootbox Page
+app.get('/lootbox', auth.isAuthenticated, (req, res, next) => {
+  res.render('lootbox', {pageTitle: "Lootbox"});
+});
+
+//Get Inventar Page
+app.get('/inventar', auth.isAuthenticated, (req, res, next) => {
+  res.render('inventar', {pageTitle: "Inventar"});
+});
+
+//Get Profil Page
+app.get('/profil', auth.isAuthenticated, (req, res, next) => {
+  res.render('profil', {pageTitle: "Profil"});
+});
+
+app.get('/postsignup', (req, res) => {
+  res.render('postsignup', {pageTitle: 'Registrierung bestätigen'});
+});
+
+////Authentication implementation end
+
+//Get Index Page before authentication and authorization
+/*app.get('/', function(req, res) {
+  res.render('index', {pageTitle: "Home"});
+});
 
 //Get Kurse Page
 app.get('/kurse', function(req, res) {
@@ -103,8 +161,8 @@ app.get('/inventar', function(req, res) {
 app.get('/profil', function(req, res) {
   res.render('profil', {pageTitle: "Profil"});
 });
+*/
 
 app.listen(port, function () {
   console.log("Server is running on port " + port);
 });
-
