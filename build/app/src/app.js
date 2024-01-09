@@ -63,20 +63,6 @@ app.get('/kurse', auth.isAuthenticated, (req, res, next) => {
   res.render('kurse', {pageTitle: "Kurse"});
 });
 
-app.get('/highscore', auth.isAuthenticated, (req, res, next) => {
-  res.render('index', {pageTitle: 'Highscore'});
-});
-
-//Get Lootbox Page
-app.get('/lootbox', auth.isAuthenticated, (req, res, next) => {
-  res.render('lootbox', {pageTitle: "Lootbox"});
-});
-
-//Get Inventar Page
-app.get('/inventar', auth.isAuthenticated, (req, res, next) => {
-  res.render('inventar', {pageTitle: "Inventar"});
-});
-
 //Get Profil Page
 app.get('/profil', auth.isAuthenticated, (req, res, next) => {
   res.render('profil', {pageTitle: "Profil"});
@@ -88,80 +74,64 @@ app.get('/postsignup', (req, res) => {
 
 ////Authentication implementation end
 
-//Get Index Page before authentication and authorization
-/*app.get('/', function(req, res) {
-  res.render('index', {pageTitle: "Home"});
-});
-
-//Get Kurse Page
-app.get('/kurse', function(req, res) {
-  res.render('kurse', {pageTitle: "Kurse"});
-});
-
 //Get Highscore Page
 app.get('/highscore', function (req, res) {
-var selectedKurs = req.query.sort || 'Alle'; // Get the selected Kurs from the form
-if(selectedKurs === 'Alle'){
-var userQuery = "SELECT vorname, name, COALESCE(SUM(exp), 0) AS exp " +
-              "FROM levelup.benutzer " +
-              "LEFT JOIN levelup.benutzer_kurs USING (user_id)" +
-              "GROUP BY user_id ORDER BY exp DESC";
-  }else{
-    var userQuery = "SELECT vorname, name, COALESCE(SUM(exp), 0) AS exp " +
-              "FROM levelup.benutzer " +
-              "LEFT JOIN levelup.benutzer_kurs USING (user_id)" +
-              "LEFT JOIN levelup.kurs USING (kurs_id)" +
-              "WHERE bezeichnung = '" + selectedKurs +
-              "' GROUP BY user_id ORDER BY exp DESC";
-  }
-    
-    var kursQuery = "SELECT bezeichnung FROM levelup.kurs";
-
-    con.query(userQuery, function (errUser, userRows) { // Datenbankabfrage Userscores
-        if (errUser) throw errUser;
-    
-        con.query(kursQuery, function (errKurs, kursRows) { // Datenbankabfrage Kurse für Kursselect
-          if (errKurs) throw errKurs;
-          
-          // Render the 'highscore.ejs' template with both sets of data
-          res.render('highscore', { userData: userRows, kursData: kursRows, selectedKurs: selectedKurs, pageTitle: "Highscore-Board", sort: selectedKurs });
-        });
-      });
-
-});
-
-//Get Lootbox Page
-app.get('/lootbox', function(req, res) {
-  res.render('lootbox', {pageTitle: "Lootbox"});
-});
-
-//Get Inventar Page
-app.get('/inventar', function(req, res) {
-  const sortParam = req.query.sort || null;
-  if(sortParam == 'Rarity') {
-    var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit " +
-              "FROM levelup.item ORDER BY seltenheit;";
-  }else if(sortParam == 'Name') {
-    var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit " +
-              "FROM levelup.item ORDER BY bezeichnung;";
-  }
-  else{
-    var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit " +
-              "FROM levelup.item;";
-  }
+  var selectedKurs = req.query.sort || 'Alle'; // Get the selected Kurs from the form
+  if(selectedKurs === 'Alle'){
+  var userQuery = "SELECT vorname, name, COALESCE(SUM(exp), 0) AS exp " +
+                "FROM levelup.benutzer " +
+                "LEFT JOIN levelup.benutzer_kurs USING (user_id)" +
+                "GROUP BY user_id ORDER BY exp DESC";
+    }else{
+      var userQuery = "SELECT vorname, name, COALESCE(SUM(exp), 0) AS exp " +
+                "FROM levelup.benutzer " +
+                "LEFT JOIN levelup.benutzer_kurs USING (user_id)" +
+                "LEFT JOIN levelup.kurs USING (kurs_id)" +
+                "WHERE bezeichnung = '" + selectedKurs +
+                "' GROUP BY user_id ORDER BY exp DESC";
+    }
+      
+      var kursQuery = "SELECT bezeichnung FROM levelup.kurs";
   
-  con.query(itemQuery, function(err, result){
-    if(err) throw err;
-    res.render('inventar', {items: result, pageTitle: "Inventar", sort: sortParam});
+      con.query(userQuery, function (errUser, userRows) { // Datenbankabfrage Userscores
+          if (errUser) throw errUser;
+      
+          con.query(kursQuery, function (errKurs, kursRows) { // Datenbankabfrage Kurse für Kursselect
+            if (errKurs) throw errKurs;
+            
+            // Render the 'highscore.ejs' template with both sets of data
+            res.render('highscore', { userData: userRows, kursData: kursRows, selectedKurs: selectedKurs, pageTitle: "Highscore-Board", sort: selectedKurs });
+          });
+        });
+  
   });
   
-});
-
-//Get Profil Page
-app.get('/profil', function(req, res) {
-  res.render('profil', {pageTitle: "Profil"});
-});
-*/
+  //Get Lootbox Page
+  app.get('/lootbox', function(req, res) {
+    res.render('lootbox', {pageTitle: "Lootbox"});
+  });
+  
+  //Get Inventar Page
+  app.get('/inventar', function(req, res) {
+    const sortParam = req.query.sort || null;
+    if(sortParam == 'Rarity') {
+      var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit " +
+                "FROM levelup.item ORDER BY seltenheit;";
+    }else if(sortParam == 'Name') {
+      var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit " +
+                "FROM levelup.item ORDER BY bezeichnung;";
+    }
+    else{
+      var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit " +
+                "FROM levelup.item;";
+    }
+    
+    con.query(itemQuery, function(err, result){
+      if(err) throw err;
+      res.render('inventar', {items: result, pageTitle: "Inventar", sort: sortParam});
+    });
+    
+  });
 
 app.listen(port, function () {
   console.log("Server is running on port " + port);
