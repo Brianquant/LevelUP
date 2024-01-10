@@ -6,6 +6,10 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 const pool = require('../db');
 
+router.get('/signup', (req, res) => {
+    res.render('signup', {pageTitle: 'Registrieren'});
+})
+
 router.post('/signup', urlencodedParser, async (req, res) => {
     new_user = {
         firstname: req.body.firstname.toLowerCase(),
@@ -37,6 +41,10 @@ router.post('/signup', urlencodedParser, async (req, res) => {
     // Close the connection
     connection.release();
     res.redirect('/postsignup');
+});
+
+router.get('/postsignup', (req, res) => {
+    res.render('postsignup', {pageTitle: 'Registrierung bestätigen'});
 });
 
 router.post('/postsignup', urlencodedParser, async (req, res) => {
