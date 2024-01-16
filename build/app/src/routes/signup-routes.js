@@ -32,7 +32,7 @@ router.post('/signup', urlencodedParser, async (req, res) => {
         req.session.user.username = new_user.firstname.slice(0, 9) + '_' + new_user.lastname.slice(0, 9) + userCount[0].count;
     }
 
-    req.session.user = {
+    req.session.new_user = {
         ...new_user,
         firstname: new_user.firstname.toLowerCase().replace(/\b\w/g, s => s.toUpperCase()),
         lastname: new_user.lastname.toLowerCase().replace(/\b\w/g, s => s.toUpperCase())
@@ -40,6 +40,7 @@ router.post('/signup', urlencodedParser, async (req, res) => {
 
     // Close the connection
     connection.release();
+    delete req.session.user;
     res.redirect('/postsignup');
 });
 
@@ -53,7 +54,7 @@ router.post('/postsignup', urlencodedParser, async (req, res) => {
         const connection = await pool.getConnection();
         //console.log(req.session.user);
 
-        const [gradeID] = await connection.query('SELECT klasse_id FROM klasse WHERE bezeichnung = ?', [req.session.user.grade]);
+        const [gradeID] = await connection.query('SELECT klasse_id FROM klasse WHERE bezeichnung = ?', [req.session.new_user.grade]);
 
         const [grade] = await connection.query('SELECT * FROM klasse WHERE klasse_id = ?', [gradeID[0].klasse_id]);
         //console.log(secret, grade[0].secret);
@@ -62,10 +63,11 @@ router.post('/postsignup', urlencodedParser, async (req, res) => {
             res.status(401).json({ message: 'Invalid code' });
         } else {
             const [user] = await connection.query('INSERT INTO benutzer(name, vorname, klasse_id, passwort, username) VALUES(?, ?, ?, ?, ?)', 
-            [req.session.user.lastname, req.session.user.firstname, gradeID[0].klasse_id, req.session.user.password, req.session.user.username]);
+            [req.session.new_user.lastname, req.session.new_user.firstname, gradeID[0].klasse_id, req.session.new_user.password, req.session.new_user.username]);
 
             connection.release();
             res.send("<script>alert(\"Your Account has been created successfully\"); window.location.href = \"/login\"; </script>");
+            delete req.session.new_user;
         }
         
         //console.log(new_user.grade, gradeID[0].klasse_id);
