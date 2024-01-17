@@ -28,7 +28,7 @@
         <tbody>
             <% var position = 1; %>
             <% userData.forEach(function(row) { %>
-                <tr>
+                <tr <% if (row.user_id === loggedInUserId) { %> style="background-color: red;" <% } %>>
                   <td><%= position++ %>.</td>
                   <td><%= row.vorname %> <%= row.name %></td>
                   <td><%= row.exp %></td>

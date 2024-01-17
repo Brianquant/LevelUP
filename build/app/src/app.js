@@ -113,17 +113,22 @@ app.get('/highscore', function (req, res) {
   
   //Get Inventar Page
   app.get('/inventar', function(req, res) {
+
+
+    // Access user information from the session
+    const user_id = req.session.user.user_id;
+
     const sortParam = req.query.sort || null;
     if(sortParam == 'Rarity') {
-      var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit " +
-                "FROM levelup.item ORDER BY seltenheit;";
+      var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit, anzahl " +
+                      "FROM levelup.benutzer_item JOIN item USING(item_id) WHERE user_id = '"+ user_id + "' ORDER BY seltenheit;";
     }else if(sortParam == 'Name') {
-      var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit " +
-                "FROM levelup.item ORDER BY bezeichnung;";
+      var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit, anzahl " +
+                      "FROM levelup.benutzer_item JOIN item USING(item_id) WHERE user_id = '"+ user_id + "' ORDER BY bezeichnung;";
     }
     else{
-      var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit " +
-                "FROM levelup.item;";
+      var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit, anzahl " +
+                      "FROM levelup.benutzer_item JOIN item USING(item_id) WHERE user_id = '"+ user_id + "'";
     }
     
     con.query(itemQuery, function(err, result){

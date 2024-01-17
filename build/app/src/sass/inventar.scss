@@ -1,8 +1,8 @@
 @import 'main.scss';
 
   .inventory {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     grid-gap: 15px;
     margin: auto;
   }
