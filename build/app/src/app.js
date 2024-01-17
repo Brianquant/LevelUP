@@ -99,7 +99,6 @@ app.get('/highscore', function (req, res) {
           con.query(kursQuery, function (errKurs, kursRows) { // Datenbankabfrage Kurse für Kursselect
             if (errKurs) throw errKurs;
             
-            // Render the 'highscore.ejs' template with both sets of data
             res.render('highscore', { userData: userRows, kursData: kursRows, selectedKurs: selectedKurs, pageTitle: "Highscore-Board", sort: selectedKurs, loggedInUserId: req.session.user.user_id });
           });
         });
@@ -108,19 +107,18 @@ app.get('/highscore', function (req, res) {
   
   //Get Lootbox Page
   app.get('/lootbox', function(req, res) {
-    //console.log(req.query.type);
     if(req.query.type){
     var itemsQuery = "SELECT * FROM item WHERE seltenheit = '" + req.query.type + "';";
-    con.query(itemsQuery, function(err, items) {
+    con.query(itemsQuery, function(err, items) { //Select all items which can appear in selected lootbox
       if (err) throw err;
-      //console.log(items);
-      res.json(items);
+      res.json(items); //Send received data
     });}else{
-      // Access user information from the session
+
+      //Get user_id to only show lootboxes that the user owns
       const user_id = req.session.user.user_id;
 
       var lootboxQuery = "SELECT anzahl, seltenheit FROM lootbox_benutzer JOIN lootbox USING (lootbox_id) WHERE user_id = '" + user_id + "';";
-      con.query(lootboxQuery, function(err, lootboxData) {
+      con.query(lootboxQuery, function(err, lootboxData) { //Get all lootboxes the user owns
         if (err) throw err;
         res.render('lootbox', {pageTitle: "Lootbox", lootboxData: lootboxData});
       });
@@ -133,29 +131,25 @@ app.get('/highscore', function (req, res) {
 
   app.get('/lootbox/open', function(req, res){
     const user_id = req.session.user.user_id;
-    console.log("Open");
     var itemsQuery = "SELECT * FROM item WHERE seltenheit = '" + req.query.lootboxType + "';";
-    con.query(itemsQuery, function(err, items) {
+    con.query(itemsQuery, function(err, items) { //Get all items which can appear in the opened lootbox
       if (err) throw err;
-      var randomNumber = Math.floor(Math.random() * items.length);
-      console.log(items[randomNumber].item_id);
+      var randomNumber = Math.floor(Math.random() * items.length); //Get a random number to randomly select an item
       var removeOneLootbox = "UPDATE lootbox_benutzer JOIN lootbox USING(lootbox_id) SET anzahl = anzahl - 1 WHERE seltenheit = '" + req.query.lootboxType + "' AND user_id = '" + user_id + "'";
-      con.query(removeOneLootbox, function(err, result) {if (err) throw err; console.log(result);});
+      con.query(removeOneLootbox, function(err, result) {if (err) throw err; console.log(result);}); // decrease the number of lootboxes by one
       var addItem = "INSERT INTO benutzer_item (user_id, item_id, anzahl) VALUES ('" + user_id + "' ,'"+ items[randomNumber].item_id+"' , 1) ON DUPLICATE KEY UPDATE anzahl = anzahl + 1;"
-      con.query(addItem, function(err, result) { if (err) throw err; console.log(result);});
-      res.json(items[randomNumber]);
+      con.query(addItem, function(err, result) { if (err) throw err; console.log(result);}); //Insert the item the user got in the db
+      res.json(items[randomNumber]); //return the item the user got
     });
   });
   
   //Get Inventar Page
   app.get('/inventar', function(req, res) {
-
-
     // Access user information from the session
     const user_id = req.session.user.user_id;
 
     const sortParam = req.query.sort || "Älteste - Neuste";
-    if(sortParam == 'Seltenheit') {
+    if(sortParam == 'Seltenheit') { //change query depending on the sortParam
       var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit, anzahl " +
                       "FROM levelup.benutzer_item JOIN item USING(item_id) WHERE user_id = '"+ user_id + "' ORDER BY seltenheit;";
     }else if(sortParam == 'Name') {
@@ -167,7 +161,7 @@ app.get('/highscore', function (req, res) {
                       "FROM levelup.benutzer_item JOIN item USING(item_id) WHERE user_id = '"+ user_id + "'";
     }
     
-    con.query(itemQuery, function(err, result){
+    con.query(itemQuery, function(err, result){ //Get all items the user owns from the database
       if(err) throw err;
       res.render('inventar', {items: result, pageTitle: "Inventar", sort: sortParam});
     });

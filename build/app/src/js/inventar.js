@@ -1,14 +1,16 @@
 $(document).ready(function () {
-
+    //get the item if it comes from the lootbox
     var storedItemData = localStorage.getItem('itemData');
+    //remove it from the localStorage
     localStorage.removeItem('itemData');
-    console.log(storedItemData);
+
+    //if an item is in the localStorage show the item in a modal
     if(storedItemData){
         openItemModal(JSON.parse(storedItemData));
         storedItemData = null;
         console.log(storedItemData);
     }
-    // Event handler for clicking on a slot
+    // show item in modal when clicked on
     $('.slot').on('click', function () {
     // Get the item-data of the clicked slot
     var itemData = $(this).data('item');
