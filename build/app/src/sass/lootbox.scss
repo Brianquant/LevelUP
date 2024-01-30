@@ -1,0 +1,51 @@
+@import 'main.scss';
+
+img{
+    max-height: 20rem;
+    max-width: 20rem;
+}
+  
+  .boxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .lootbox {
+    margin: 10px;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+  .lootbox:hover{
+    transform: scale(1.2);
+    z-index: 2;
+    cursor: pointer;
+  }
+
+  .fading-edges{
+    box-shadow: 0 0 20px 12px rgb(44 33 73);
+    margin: 20px;
+    border-radius: 180px;
+  }
+
+  .modal-body, p{
+    font-size: 18px;
+    color: white !important;
+    line-height: normal;
+    font-family: $font-digi;
+  }
+
+  span.purple{
+    color: $primary;
+  }
+
+  .modal-footer{
+    gap: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .lootbox {
+      flex-basis: 45%; /* Adjust based on your design */
+    }
+  }
+  

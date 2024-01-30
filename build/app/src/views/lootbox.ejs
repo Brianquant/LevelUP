@@ -1,1 +1,93 @@
-<div class="text-center"><img src="../assets/Work-In-Progress.png"></div>
+<link href="css/lootbox.min.css" rel="stylesheet">
+<link href="css/main.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="/js/lootbox.js"></script>
+<h1>Lootboxen</h1>
+<div class="container" id="container">
+    <div class="boxes">
+
+        <!--Bronze-->
+        <% bronzeAnzahl = lootboxData.find(item => item.seltenheit === "Bronze") ? lootboxData.find(item => item.seltenheit === "Bronze").anzahl : 0 %>
+        <div class="lootbox" data-item='Bronze' data-count='<%= bronzeAnzahl %>'>
+            <img class="lootbox_img" src="/assets/lootboxen/Bronze_Lootbox.png" style="transform: scale(0.9);">
+            <h3>Bronze<span class="badge rounded-pill bg-primary position-absolute top-0 start-100 translate-middle">        
+                <%= bronzeAnzahl %>   
+            </span></h3>
+        </div>
+    
+        <!--Silber-->
+        <% silberAnzahl = lootboxData.find(item => item.seltenheit === "Silber") ? lootboxData.find(item => item.seltenheit === "Silber").anzahl : 0 %>
+        <div class="lootbox" data-item='Silber' data-count='<%= silberAnzahl %>'>
+            <img class="lootbox_img" src="/assets/lootboxen/Silber_Lootbox.png">
+            <h3>Silber<span class="badge rounded-pill bg-primary position-absolute top-0 start-100 translate-middle">
+                <%= silberAnzahl %>  
+            </span></h3>
+        </div>
+
+        <!--Gold-->
+        <% goldAnzahl = lootboxData.find(item => item.seltenheit === "Gold") ? lootboxData.find(item => item.seltenheit === "Gold").anzahl : 0 %>
+        <div class="lootbox" data-item='Gold' data-count='<%= goldAnzahl %>  '>
+            <img class="lootbox_img" src="/assets/lootboxen/Gold_Lootbox.png">
+            <h3>Gold<span class="badge rounded-pill bg-primary position-absolute top-0 start-100 translate-middle">
+                <%= goldAnzahl %>  
+            </span></h3>
+        </div>
+
+        <!--Platin-->
+        <% platinAnzahl = lootboxData.find(item => item.seltenheit === "Platin") ? lootboxData.find(item => item.seltenheit === "Platin").anzahl : 0 %>
+        <div class="lootbox" data-item='Platin' data-count='<%= platinAnzahl %>'>
+            <img class="lootbox_img" src="/assets/lootboxen/Platin_Lootbox.png">
+            <h3>Platin<span class="badge rounded-pill bg-primary position-absolute top-0 start-100 translate-middle">
+                <%= platinAnzahl %>  
+            </span></h3>
+        </div>
+        <!--Diamant-->
+        <% diamantAnzahl = lootboxData.find(item => item.seltenheit === "Diamant") ? lootboxData.find(item => item.seltenheit === "Diamant").anzahl : 0 %>
+        <div class="lootbox" data-item='Diamant' data-count='<%= diamantAnzahl %>'>
+            <img class="lootbox_img" src="/assets/lootboxen/Diamant_Lootbox.png">
+            <h3>Diamant<span class="badge rounded-pill bg-primary position-absolute top-0 start-100 translate-middle">
+                <%= diamantAnzahl %>  
+            </span></h3>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal mit Lootbox Daten : Bild, Rarität, Items die enthalten sein können, Öffnen Button -->
+<div class="modal fade" id="LootboxInfo" tabindex="-1" aria-labelledby="LootboxInfoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title fs-5" id="LootboxInfoLabel">Modal title</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div id="lootbox-details"></div>
+        </div>
+        <div class="modal-footer">
+        <button id="openLootbox" type="button" class="btn btn-primary" onclick="openLootbox()">Öffnen</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<!-- Modal mit Item Daten -->
+<div class="modal fade" id="ItemInfo" tabindex="-1" aria-labelledby="ItemInfoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title fs-5" id="ItemInfoLabel">Modal title</h4>
+          <a type="button" class="btn-close" href="lootbox" aria-label="Close"></a>
+        </div>
+        <div class="modal-body">
+            <div id="item-details"></div>
+        </div>
+        <div class="modal-footer">
+        <a id="inventarButton" class="btn btn-primary" href="inventar" role="button" onclick="openInventory()">Im Inventar anzeigen </a>
+        <a class="btn btn-primary" href="lootbox" role="button">Close</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  

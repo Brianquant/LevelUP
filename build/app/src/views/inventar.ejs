@@ -11,8 +11,9 @@
         </a>
     
         <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="inventar">Älteste - Neuste</a></li>
             <li><a class="dropdown-item" href="inventar?sort=Name">Name</a></li>
-            <li><a class="dropdown-item" href="inventar?sort=Rarity">Rarity</a></li>
+            <li><a class="dropdown-item" href="inventar?sort=Seltenheit">Seltenheit</a></li>
         </ul>
     </div>
     <div class="inventory">
@@ -36,7 +37,7 @@
                     <img src="/assets/platin.png">
                 <% } %>
                 <span class="badge rounded-pill bg-primary position-absolute top-0 start-100 translate-middle">
-                    <!-- Anzahl Items --> 1
+                    <%= item.anzahl %>
                 </span>
                 <h6><%= item.bezeichnung %></h6>
 
@@ -46,7 +47,7 @@
 </div>
 
 
-<!-- Modal -->
+<!-- Item-Modal -->
 <div class="modal fade" id="ItemInfo" tabindex="-1" aria-labelledby="ItemInfoLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
