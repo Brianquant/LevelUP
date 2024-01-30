@@ -9,7 +9,7 @@ var port = 3333;
 
 //Datenbank Connection
 var con = mysql.createConnection({
-  host: "mysql",
+  host: "mysql", // change host to localhost for development mode
   user: "root",
   password: "l3v3lup",
   database: "levelup"
@@ -75,7 +75,7 @@ app.get('/postsignup', (req, res) => {
 ////Authentication implementation end
 
 //Get Highscore Page
-app.get('/highscore', function (req, res) {
+app.get('/highscore', auth.isAuthenticated, function (req, res) {
   var selectedKurs = req.query.sort || 'Alle'; // Get the selected Kurs from the form
   if(selectedKurs === 'Alle'){
   var userQuery = "SELECT user_id, vorname, name, COALESCE(SUM(exp), 0) AS exp " +
@@ -152,6 +152,12 @@ app.get('/highscore', function (req, res) {
     if(sortParam == 'Seltenheit') { //change query depending on the sortParam
       var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit, anzahl " +
                       "FROM levelup.benutzer_item JOIN item USING(item_id) WHERE user_id = '"+ user_id + "' ORDER BY seltenheit;";
+
+  app.get('/inventar', auth.isAuthenticated, function(req, res) {
+    const sortParam = req.query.sort || null;
+    if(sortParam == 'Rarity') {
+      var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit " +
+                "FROM levelup.item ORDER BY seltenheit;";
     }else if(sortParam == 'Name') {
       var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit, anzahl " +
                       "FROM levelup.benutzer_item JOIN item USING(item_id) WHERE user_id = '"+ user_id + "' ORDER BY bezeichnung;";
