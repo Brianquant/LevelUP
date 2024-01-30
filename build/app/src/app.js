@@ -144,7 +144,7 @@ app.get('/highscore', auth.isAuthenticated, function (req, res) {
   });
   
   //Get Inventar Page
-  app.get('/inventar', function(req, res) {
+app.get('/inventar', function(req, res) {
     // Access user information from the session
     const user_id = req.session.user.user_id;
 
@@ -152,7 +152,8 @@ app.get('/highscore', auth.isAuthenticated, function (req, res) {
     if(sortParam == 'Seltenheit') { //change query depending on the sortParam
       var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit, anzahl " +
                       "FROM levelup.benutzer_item JOIN item USING(item_id) WHERE user_id = '"+ user_id + "' ORDER BY seltenheit;";
-
+      }
+  });
   app.get('/inventar', auth.isAuthenticated, function(req, res) {
     const sortParam = req.query.sort || null;
     if(sortParam == 'Rarity') {
@@ -160,11 +161,11 @@ app.get('/highscore', auth.isAuthenticated, function (req, res) {
                 "FROM levelup.item ORDER BY seltenheit;";
     }else if(sortParam == 'Name') {
       var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit, anzahl " +
-                      "FROM levelup.benutzer_item JOIN item USING(item_id) WHERE user_id = '"+ user_id + "' ORDER BY bezeichnung;";
+                "FROM levelup.benutzer_item JOIN item USING(item_id) WHERE user_id = '"+ user_id + "' ORDER BY bezeichnung;";
     }
     else{
       var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit, anzahl " +
-                      "FROM levelup.benutzer_item JOIN item USING(item_id) WHERE user_id = '"+ user_id + "'";
+                "FROM levelup.benutzer_item JOIN item USING(item_id) WHERE user_id = '"+ user_id + "'";
     }
     
     con.query(itemQuery, function(err, result){ //Get all items the user owns from the database
@@ -174,6 +175,6 @@ app.get('/highscore', auth.isAuthenticated, function (req, res) {
     
   });
 
-app.listen(port, function () {
-  console.log("Server is running on port " + port);
-});
+  app.listen(port, function () {
+    console.log("Server is running on port " + port);
+  });
