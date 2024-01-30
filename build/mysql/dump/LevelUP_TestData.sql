@@ -31,11 +31,12 @@ CREATE TABLE `benutzer` (
   `passwort` varchar(100) DEFAULT NULL,
   `klasse_id` int DEFAULT NULL,
   `username` varchar(20) DEFAULT NULL,
+  `rolle` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `username_UNIQUE` (`username`),
   KEY `klasse_id2_idx` (`klasse_id`),
   CONSTRAINT `klasse_id2` FOREIGN KEY (`klasse_id`) REFERENCES `klasse` (`klasse_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +45,7 @@ CREATE TABLE `benutzer` (
 
 LOCK TABLES `benutzer` WRITE;
 /*!40000 ALTER TABLE `benutzer` DISABLE KEYS */;
-INSERT INTO `benutzer` VALUES (1,'Mustermann','Max','12345',1,'max_musterman'),(2,'Doe','John','$2a$12$qWyBhmH68TRYle9DBlJWIuqLwVO6KKuhu/c34lbKjmq8wxWQ9O29i',1,'john_doe'),(3,'Doe','Jane','12345',1,'jane_doe'),(4,'Lorem','Ipsum','54321',1,'ipsum_lorem'),(5,'Smith','John','password123',1,'john_smith'),(6,'Johnson','Alice','securepass',2,'alice_johnson'),(7,'Doe','Bob','p@ssw0rd',1,'bob_doe'),(8,'Brown','Emma','qwerty',3,'emma_brown'),(9,'Miller','Daniel','letmein',2,'daniel_miller'),(10,'Wilson','Olivia','123456',1,'olivia_wilson'),(11,'Moore','Liam','iloveyou',3,'liam_moore'),(12,'Anderson','Sophia','admin123',2,'sophia_anderson'),(13,'Jackson','Ethan','welcome1',1,'ethan_jackson'),(14,'White','Ava','pass123',3,'ava_white'),(15,'Harris','Noah','testpass',2,'noah_harris'),(16,'Hall','Isabella','changeme',1,'isabella_hall'),(17,'Lopez','Mia','password01',3,'mia_lopez'),(18,'Young','James','newpass',2,'james_young'),(19,'King','Emily','userpass',1,'emily_king'),(20,'Hill','Matthew','letsgo',3,'matthew_hill'),(21,'Lee','Amelia','secret',2,'amelia_lee'),(22,'Baker','Michael','mypassword',1,'michael_baker'),(23,'Green','Abigail','hello123',3,'abigail_green'),(24,'Turner','David','pass1234',2,'david_turner');
+INSERT INTO `benutzer` VALUES (1,'Mustermann','Max','12345',1,'max_musterman',NULL),(2,'Doe','John','$2a$12$qWyBhmH68TRYle9DBlJWIuqLwVO6KKuhu/c34lbKjmq8wxWQ9O29i',1,'john_doe',NULL),(3,'Doe','Jane','$2a$12$8MQ1EJaBBYpU.bby4ypeqe/mvjJUC8JSJ8yvd2.dz42RTdZ9MV0MG',1,'jane_doe',NULL),(4,'Lorem','Ipsum','54321',1,'ipsum_lorem',NULL),(5,'Smith','John','password123',1,'john_smith',NULL),(6,'Johnson','Alice','securepass',2,'alice_johnson',NULL),(7,'Doe','Bob','p@ssw0rd',1,'bob_doe',NULL),(8,'Brown','Emma','qwerty',3,'emma_brown',NULL),(9,'Miller','Daniel','letmein',2,'daniel_miller',NULL),(10,'Wilson','Olivia','123456',1,'olivia_wilson',NULL),(11,'Moore','Liam','iloveyou',3,'liam_moore',NULL),(12,'Anderson','Sophia','admin123',2,'sophia_anderson',NULL),(13,'Jackson','Ethan','welcome1',1,'ethan_jackson',NULL),(14,'White','Ava','pass123',3,'ava_white',NULL),(15,'Harris','Noah','testpass',2,'noah_harris',NULL),(16,'Hall','Isabella','changeme',1,'isabella_hall',NULL),(17,'Lopez','Mia','password01',3,'mia_lopez',NULL),(18,'Young','James','newpass',2,'james_young',NULL),(19,'King','Emily','userpass',1,'emily_king',NULL),(20,'Hill','Matthew','letsgo',3,'matthew_hill',NULL),(21,'Lee','Amelia','secret',2,'amelia_lee',NULL),(22,'Baker','Michael','mypassword',1,'michael_baker',NULL),(23,'Green','Abigail','hello123',3,'abigail_green',NULL),(24,'Turner','David','pass1234',2,'david_turner',NULL),(56,'Asd','Asd','$2b$12$i9BnLVWgPejGZtfKvgegQugN19uLlLUDkhQqxFnKocSBiAXDldB.2',2,'asd_asd',NULL);
 /*!40000 ALTER TABLE `benutzer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -333,4 +334,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-01-04 10:49:57
+-- Dump completed on 2024-01-30  8:43:28

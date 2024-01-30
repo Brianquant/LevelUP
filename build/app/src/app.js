@@ -9,7 +9,7 @@ var port = 3333;
 
 //Datenbank Connection
 var con = mysql.createConnection({
-  host: "localhost", // change host to localhost for development mode
+  host: "mysql",
   user: "root",
   password: "l3v3lup",
   database: "levelup"
@@ -49,27 +49,17 @@ app.use('/', authRoutes);
 const signupRoutes = require('./routes/signup-routes');
 app.use('/', signupRoutes);
 
+const profileRoutes = require('./routes/profile-routes');
+app.use('/', auth.isAuthenticated, profileRoutes);
+
 //Get Index Page before authentication and authorization
 app.get('/', auth.isAuthenticated, (req, res, next) => {
   res.render('index', {pageTitle: 'Home'});
 });
 
-app.get('/signup', (req, res) => {
-  res.render('signup', {pageTitle: 'Registrieren'});
-})
-
 //Get Kurse Page
-app.get('/kurse', auth.isAuthenticated, (req, res, next) => {
+app.get('/kurse', (req, res, next) => {
   res.render('kurse', {pageTitle: "Kurse"});
-});
-
-//Get Profil Page
-app.get('/profil', auth.isAuthenticated, (req, res, next) => {
-  res.render('profil', {pageTitle: "Profil"});
-});
-
-app.get('/postsignup', (req, res) => {
-  res.render('postsignup', {pageTitle: 'Registrierung bestätigen'});
 });
 
 ////Authentication implementation end

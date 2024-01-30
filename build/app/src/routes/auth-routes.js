@@ -19,6 +19,7 @@ router.post('/login', async (req, res) => {
 
     // Fetch user from the database
     const [user] = await connection.query('SELECT * FROM benutzer WHERE username = ?', [username]);
+    const [grade] = await connection.query('SELECT * FROM klasse WHERE klasse_id = ?', [user[0].klasse_id]);
     //console.log(user);
     
     // Close the connection
@@ -34,7 +35,10 @@ router.post('/login', async (req, res) => {
         user_id: user[0].user_id,
         username: user[0].username,
         firstname: user[0].vorname,
-        lastname: user[0].name
+        lastname: user[0].name,
+        grade: grade[0].bezeichnung,
+        teacher: grade[0].klassenlehrer,
+        role: user[0].rolle,
       }
       //console.log('Session Data:', req.session);
       
