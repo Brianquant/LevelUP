@@ -37,7 +37,8 @@ router.post('/login', async (req, res) => {
         firstname: user[0].vorname,
         lastname: user[0].name,
         grade: grade[0].bezeichnung,
-        teacher: grade[0].klassenlehrer
+        teacher: grade[0].klassenlehrer,
+        role: user[0].rolle,
       }
       //console.log('Session Data:', req.session);
       
