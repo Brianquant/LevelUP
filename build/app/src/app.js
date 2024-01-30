@@ -9,7 +9,7 @@ var port = 3333;
 
 //Datenbank Connection
 var con = mysql.createConnection({
-  host: "mysql", // change host to localhost for development mode
+  host: "localhost", // change host to localhost for development mode
   user: "root",
   password: "l3v3lup",
   database: "levelup"
@@ -143,37 +143,30 @@ app.get('/highscore', auth.isAuthenticated, function (req, res) {
     });
   });
   
-  //Get Inventar Page
-app.get('/inventar', function(req, res) {
-    // Access user information from the session
-    const user_id = req.session.user.user_id;
+ //Get Inventar Page
+ app.get('/inventar', auth.isAuthenticated, function(req, res) {
+  // Access user information from the session
+  const user_id = req.session.user.user_id;
 
-    const sortParam = req.query.sort || "Älteste - Neuste";
-    if(sortParam == 'Seltenheit') { //change query depending on the sortParam
-      var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit, anzahl " +
-                      "FROM levelup.benutzer_item JOIN item USING(item_id) WHERE user_id = '"+ user_id + "' ORDER BY seltenheit;";
-      }
+  const sortParam = req.query.sort || "Älteste - Neuste";
+  if(sortParam == 'Seltenheit') { //change query depending on the sortParam
+    var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit, anzahl " +
+                    "FROM levelup.benutzer_item JOIN item USING(item_id) WHERE user_id = '"+ user_id + "' ORDER BY seltenheit;";
+  }else if(sortParam == 'Name') {
+    var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit, anzahl " +
+                    "FROM levelup.benutzer_item JOIN item USING(item_id) WHERE user_id = '"+ user_id + "' ORDER BY bezeichnung;";
+  }
+  else{
+    var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit, anzahl " +
+                    "FROM levelup.benutzer_item JOIN item USING(item_id) WHERE user_id = '"+ user_id + "'";
+  }
+  
+  con.query(itemQuery, function(err, result){ //Get all items the user owns from the database
+    if(err) throw err;
+    res.render('inventar', {items: result, pageTitle: "Inventar", sort: sortParam});
   });
-  app.get('/inventar', auth.isAuthenticated, function(req, res) {
-    const sortParam = req.query.sort || null;
-    if(sortParam == 'Rarity') {
-      var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit " +
-                "FROM levelup.item ORDER BY seltenheit;";
-    }else if(sortParam == 'Name') {
-      var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit, anzahl " +
-                "FROM levelup.benutzer_item JOIN item USING(item_id) WHERE user_id = '"+ user_id + "' ORDER BY bezeichnung;";
-    }
-    else{
-      var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit, anzahl " +
-                "FROM levelup.benutzer_item JOIN item USING(item_id) WHERE user_id = '"+ user_id + "'";
-    }
-    
-    con.query(itemQuery, function(err, result){ //Get all items the user owns from the database
-      if(err) throw err;
-      res.render('inventar', {items: result, pageTitle: "Inventar", sort: sortParam});
-    });
-    
-  });
+  
+});
 
   app.listen(port, function () {
     console.log("Server is running on port " + port);
