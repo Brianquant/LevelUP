@@ -26,6 +26,7 @@
     transform: scale(1.2);
     text-shadow: 0 0 10px $light;
     z-index: 2;
+    cursor: pointer;
   }
 
   p{
@@ -45,5 +46,3 @@
     margin-bottom: 20px;
     display: block;
   }
-//import bootstrap
-@import '../../../../node_modules/bootstrap/scss/bootstrap';
