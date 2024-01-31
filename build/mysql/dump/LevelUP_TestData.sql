@@ -18,6 +18,32 @@ USE `levelup`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `action`
+--
+
+DROP TABLE IF EXISTS `action`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `action` (
+  `action_id` int NOT NULL,
+  `bezeichnung` varchar(45) DEFAULT NULL,
+  `beschreibung` varchar(300) DEFAULT NULL,
+  `xp` int DEFAULT NULL,
+  PRIMARY KEY (`action_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `action`
+--
+
+LOCK TABLES `action` WRITE;
+/*!40000 ALTER TABLE `action` DISABLE KEYS */;
+INSERT INTO `action` VALUES (1,'Täglicher Login','Du hast dich erfolgreich eingeloggt.',100),(2,'Positive Mitarbeit','Der/die Schüler/-in hat aktiv und positiv am Unterricht teilgenommen.',100),(3,'Wortmeldung','Der/die Schüler/-in hat sich gemeldet.',100),(4,'Wortmeldung mit Qualität','Der/die Schüler/-in hat sich gemeldet und korrekt geantwortet.',100),(5,'Abgabe','Der/die Schüler/-in hat eine geforderte bewertete Abgabe eingereicht.',100),(6,'Präsentation / Vortrag','Der/die Schüler/-in hat eine Präsentation / einen Vortrag gehalten.',100),(7,'Selbstständiges Arbeiten','Der/die Schüler/-in hat die aktuelle Aufgabe selbstständig',100),(8,'Arbeitsmaterial vollständig','Der/die Schüler/-in hat das geforderte Arbeitsmaterial',100),(9,'Negative Mitarbeit','Der/die Schüler/-in hat im Unterricht nicht mitgearbeitet.',-100),(10,'Störung','Der/die Schüler/-in hat im Unterricht gestört. Kann für jeden einzelnen Vorfall innerhalb des Unterrichts benutzt werden.',-100),(11,'Kein Arbeitsmaterial','Der/die Schüler/-in hat kein eigenes oder vollständiges',-100),(12,'Im Unterricht Spielen','Der/die Schüler/-in hat im Unterricht nicht vorgesehene Aktivitäten ausgeführt (z.B. Videospiele spielen)',-100),(13,'Fehlende Abgabe','Der/die Schüler/-in hat eine geforderte Abgabe wurde eingereicht',-100),(14,'Fehlende bewertete Abgabe','Der/die Schüler/-in hat eine geforderte bewertete Abgabe',-100),(15,'Verspätung','Der/die Schüler/-in ist zu spät zum Unterricht erschienen.',-100),(16,'Unentschuldigtes Fehlen','Der/die Schüer/-in hat seine Fehlzeit nicht Entschuldigt.',-100),(17,'Kein Selbstständiges Arbeiten','Der/die Schüler/-in hat nicht selbstständig gearbeitet. (z.B. nach Erklärung der Aufgabenstellung gefragt was gemacht werden muss)',-100);
+/*!40000 ALTER TABLE `action` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `benutzer`
 --
 
