@@ -115,11 +115,11 @@ CREATE TABLE `item` (
   `item_id` int NOT NULL AUTO_INCREMENT,
   `beschreibung` varchar(300) DEFAULT NULL,
   `bezeichnung` varchar(45) DEFAULT NULL,
-  `seltenheit` int DEFAULT NULL,
+  `lootbox_id` int DEFAULT NULL,
   `dropchance` float DEFAULT NULL,
   PRIMARY KEY (`item_id`),
-  KEY `lootbox_id_idx` (`seltenheit`),
-  CONSTRAINT `seltenheit` FOREIGN KEY (`seltenheit`) REFERENCES `lootbox` (`lootbox_id`)
+  KEY `lootbox_id_idx` (`lootbox_id`),
+  CONSTRAINT `lootbox` FOREIGN KEY (`lootbox_id`) REFERENCES `lootbox` (`lootbox_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

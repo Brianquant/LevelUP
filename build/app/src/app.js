@@ -121,7 +121,7 @@ app.get('/highscore', auth.isAuthenticated, function (req, res) {
 
   app.get('/lootbox/open', function(req, res){
     const user_id = req.session.user.user_id;
-    var itemsQuery = "SELECT * FROM item WHERE seltenheit = '" + req.query.lootboxType + "';";
+    var itemsQuery = "SELECT * FROM item JOIN lootbox USING(lootbox_id) WHERE seltenheit = '" + req.query.lootboxType + "';";
     con.query(itemsQuery, function(err, items) { //Get all items which can appear in the opened lootbox
       if (err) throw err;
       var randomNumber = Math.floor(Math.random() * items.length); //Get a random number to randomly select an item
