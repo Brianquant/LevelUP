@@ -9,7 +9,7 @@ var port = 3333;
 
 //Datenbank Connection
 var con = mysql.createConnection({
-  host: "mysql",
+  host: "localhost",
   user: "root",
   password: "l3v3lup",
   database: "levelup"

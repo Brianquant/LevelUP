@@ -62,6 +62,8 @@
                                 <%= user.role %>
                             </div>
                         </div>
+                        <hr>
+                        <input class="btn btn-primary text-center" value="Daten ändern" readonly data-bs-toggle="modal" data-bs-target="#profilBearbeiternModal"/>
                     </div>
                 </div>
 
@@ -80,6 +82,61 @@
                                 <% }); %>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="profilBearbeiternModal" tabindex="-1" aria-labelledby="profilBearbeiternLabel" aria-hidden="true">
+        <div class="modal-xl modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="profilBearbeiternLabel">Lagerortverwaltung</h1>
+                    <input class="btn btn-close" readonly data-bs-dismiss="modal" />
+                </div>
+                <div class="modal-body" id="profilModalBodyContainer">
+                    <div class="table table-responsive-md">
+                        <div class="row">
+                            <div class="col-md">
+                                <label class="col-form-label float-end">Benutzername:</label>
+                            </div>
+                            <div class="col-md">
+                                <input type="text" id="newNameModal" class="no-margin" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md">
+                                <label class="col-form-label float-end">Passwort:</label>
+                            </div>
+                            <div class="col-md">
+                                <input type="text" id="oldPwdModal" class="no-margin" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md">
+                                <label class="col-form-label float-end">Neues Passwort:</label>
+                            </div>
+                            <div class="col-md">
+                                <input type="text" id="newPwdModal" class="no-margin" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md">
+                                <label class="col-form-label float-end">Passwort bestätigen:</label>
+                            </div>
+                            <div class="col-md">
+                                <input type="text" id="newPwdConfimationModal" class="no-margin" />
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="modal-footer" style="display:block">
+                        <button type="button" class="btn btn-secondary float-start" data-bs-dismiss="modal">Abbrechen</button>
+                        <input class="btn btn-success float-end" readonly onclick="" value="Speichern" />
                     </div>
                 </div>
             </div>

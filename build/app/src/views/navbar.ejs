@@ -28,8 +28,8 @@
                     <a class="nav-link" href="profil">> Profil</a>
                 </li>
             </ul>
-            <button class="btn btn-primary me-3" id="logoutButtonNav" style="margin: 10px">Abmelden</button>
-            <button class="btn btn-primary me-2" id="signupButtonNav" style="margin: 10px">Registrieren</button>
+
+            <button class="btn btn-primary me-2" id="actionButtonNav" style="margin: 10px">Anmelden</button>
         </div>
     </div>
 </nav>
@@ -38,22 +38,23 @@
     //Check which nav-link is active
     document.addEventListener('DOMContentLoaded', function () {
         var currentPage = window.location.pathname;
-        const logoutButton = document.getElementById('logoutButtonNav');
-            logoutButton.addEventListener('click', function(e) {
-            window.location.href = '/logout';
-        });
+        const actionButton = document.getElementById('actionButtonNav');
 
-        const signupButton = document.getElementById('signupButtonNav');
-            signupButton.addEventListener('click', function(e) {
+        if (currentPage === '/login') {
+            actionButton.innerHTML = "Registrieren"
+            actionButton.addEventListener('click', function(e) {
             window.location.href = '/signup';
-        });
-
-        if (currentPage === '/login' || currentPage === '/signup') {
-            document.getElementById('logoutButtonNav').disabled = true;
-            document.getElementById('logoutButtonNav').style.display = 'none';
+            });
+        } else if (currentPage === '/signup') {
+            actionButton.innerHTML = "Anmelden"
+            actionButton.addEventListener('click', function(e) {
+            window.location.href = '/login';
+            });
         } else {
-            document.getElementById('signupButtonNav').disabled = true;
-            document.getElementById('signupButtonNav').style.display = 'none';
+            actionButton.innerHTML = "Abmelden"
+            actionButton.addEventListener('click', function(e) {
+            window.location.href = '/logout';
+            });
         }
 
         //Give the active attribute to active nav-link
