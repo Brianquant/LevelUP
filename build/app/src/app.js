@@ -141,14 +141,14 @@ app.get('/highscore', auth.isAuthenticated, function (req, res) {
   const sortParam = req.query.sort || "Älteste - Neuste";
   if(sortParam == 'Seltenheit') { //change query depending on the sortParam
     var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit, anzahl " +
-                    "FROM levelup.benutzer_item JOIN item USING(item_id) WHERE user_id = '"+ user_id + "' ORDER BY seltenheit;";
+                    "FROM benutzer_item RIGHT JOIN item USING(item_id) LEFT JOIN lootbox USING(lootbox_id) WHERE user_id = '"+ user_id + "' ORDER BY seltenheit;";
   }else if(sortParam == 'Name') {
     var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit, anzahl " +
-                    "FROM levelup.benutzer_item JOIN item USING(item_id) WHERE user_id = '"+ user_id + "' ORDER BY bezeichnung;";
+                    "FROM benutzer_item RIGHT JOIN item USING(item_id) LEFT JOIN lootbox USING(lootbox_id) WHERE user_id = '"+ user_id + "' ORDER BY bezeichnung;";
   }
   else{
     var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit, anzahl " +
-                    "FROM levelup.benutzer_item JOIN item USING(item_id) WHERE user_id = '"+ user_id + "'";
+                    "FROM benutzer_item RIGHT JOIN item USING(item_id) LEFT JOIN lootbox USING(lootbox_id) WHERE user_id = '"+ user_id + "'";
   }
   
   con.query(itemQuery, function(err, result){ //Get all items the user owns from the database
