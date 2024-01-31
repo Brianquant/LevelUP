@@ -98,7 +98,7 @@ app.get('/highscore', auth.isAuthenticated, function (req, res) {
   //Get Lootbox Page
   app.get('/lootbox', function(req, res) {
     if(req.query.type){
-    var itemsQuery = "SELECT * FROM item WHERE seltenheit = '" + req.query.type + "';";
+    var itemsQuery = "SELECT * FROM item JOIN lootbox USING(lootbox_id) WHERE seltenheit = '" + req.query.type + "';";
     con.query(itemsQuery, function(err, items) { //Select all items which can appear in selected lootbox
       if (err) throw err;
       res.json(items); //Send received data
