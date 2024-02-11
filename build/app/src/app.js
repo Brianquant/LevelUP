@@ -3,13 +3,12 @@ var mysql = require('mysql2');
 var ejs = require('ejs');
 var bodyParser = require('body-parser');
 var expressLayouts = require('express-ejs-layouts');
-
 var app = express();
 var port = 3333;
 
 //Datenbank Connection
 var con = mysql.createConnection({
-  host: "mysql",
+  host: "localhost",
   user: "root",
   password: "l3v3lup",
   database: "levelup"
@@ -52,34 +51,14 @@ app.use('/', signupRoutes);
 const profileRoutes = require('./routes/profile-routes');
 app.use('/', auth.isAuthenticated, profileRoutes);
 
+const coursesRoutes = require('./routes/course-routes');
+app.use('/', auth.isAuthenticated , coursesRoutes);
+
+
 //Get Index Page before authentication and authorization
 app.get('/', auth.isAuthenticated, (req, res, next) => {
   res.render('index', {pageTitle: 'Home'});
 });
-
-//Get Kurse Page
-app.get('/kurse', (req, res) => {
-      const current_user_id = req.session.user.user_id;
-      const benutzer_kurs_query = `SELECT kurs_id FROM levelup.benutzer_kurs WHERE user_id = ${current_user_id};`;
-      let kurs_ids = [];
-      con.query(benutzer_kurs_query, (err, current_user_kurs_ids) => {
-      for(let id = 0; id <= current_user_kurs_ids.length; id++) {
-        if(typeof current_user_kurs_ids[id] !== 'undefined') {
-          kurs_ids.push(Object.values(current_user_kurs_ids[id]));
-        }
-        // const kursQuery = `SELECT bezeichnung, anz_der_klausuren FROM levelup.kurs WHERE kurs_id = ${id};`;
-        // con.query(kursQuery, (err, kurs_details) => {
-        //     //console.log(kurs_details[0]);
-        // })
-      }
-      console.log(kursData);
-      }) 
-      
-      res.render('kurse', { pageTitle: "Kurse", kursData: kursData, loggedInUserId: req.session.user.user_id });
-
-});
-
-////Authentication implementation end
 
 //Get Highscore Page
 app.get('/highscore', auth.isAuthenticated, function (req, res) {
@@ -178,3 +157,5 @@ app.get('/highscore', auth.isAuthenticated, function (req, res) {
   app.listen(port, function () {
     console.log("Server is running on port " + port);
   });
+
+module.exports = con;
