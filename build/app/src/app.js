@@ -54,6 +54,9 @@ app.use('/', auth.isAuthenticated, profileRoutes);
 const coursesRoutes = require('./routes/course-routes');
 app.use('/', auth.isAuthenticated , coursesRoutes);
 
+const singleCourseRoutes = require('./routes/single-course-routes');
+app.use('/', auth.isAuthenticated , singleCourseRoutes);
+
 
 //Get Index Page before authentication and authorization
 app.get('/', auth.isAuthenticated, (req, res, next) => {
