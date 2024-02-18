@@ -7,7 +7,7 @@ var con = mysql.createConnection({
 });
 
 
-function get_current_kurs_ids(current_user_id) {
+function get_current_course_ids(current_user_id) {
   let benutzer_kurs_query = `SELECT kurs_id FROM levelup.benutzer_kurs WHERE user_id = ${current_user_id};`;
   return new Promise((resolve, reject) => {
     con.query(benutzer_kurs_query, (err, result) => {
@@ -21,7 +21,7 @@ function get_current_kurs_ids(current_user_id) {
   });
 }
       
-function get_current_kurse(kurs_ids) {
+function get_current_courses(kurs_ids) {
     let ids_prepare_sql = [];
         kurs_ids.forEach(element => {
           ids_prepare_sql.push(element.kurs_id);
@@ -39,4 +39,4 @@ function get_current_kurse(kurs_ids) {
     });
   }
 
-module.exports = { get_current_kurs_ids, get_current_kurse };
+module.exports = { get_current_course_ids, get_current_courses };

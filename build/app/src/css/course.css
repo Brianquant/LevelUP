@@ -12205,4 +12205,8 @@ textarea.form-control-lg {
   border-radius: 10px;
 }
 
+.show {
+  display: block !important;
+}
+
 /*# sourceMappingURL=course.css.map */

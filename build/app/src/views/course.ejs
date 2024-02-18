@@ -5,7 +5,7 @@
   <div class="row">  
   <% kursData.forEach(function(item) { %>
       <div class="col">    
-        <div id="course" class="card" style="width: 18rem;">
+        <div id="course-<%=item.kurs_id %>" class="card course" style="width: 18rem;">
           <% if (item.kurs_id === 1 || item.kurs_id === 3 || item.kurs_id === 5 || item.kurs_id === 7 || item.kurs_id === 9 || item.kurs_id === 11) { %>
           <img src="../assets/courses/course_1.jpg" class="card-img-top" alt="kurs">
           <% } %>
@@ -23,12 +23,12 @@
   <% }); %>
   </div>
 </div>
-
 <!-- Item-Modal -->
 <div class="modal fade" id="ItemInfo" tabindex="-1" aria-labelledby="ItemInfoLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered">
   <div class="modal-content">
     <div class="modal-header">
+
       <h4 class="modal-title fs-5" id="ItemInfoLabel"><% kursData.bezeichnung %></h4>
       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
@@ -62,3 +62,4 @@
   </div>
 </div>
 </div>
+<script src="../js/course.js"></script>
