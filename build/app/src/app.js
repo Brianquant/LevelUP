@@ -70,6 +70,9 @@ const singleCourseRoutes = require('./routes/single-course-routes');
 app.use('/', auth.isAuthenticated , singleCourseRoutes);
 
 
+const homeRoutes = require('./routes/home-routes');
+app.use('/', auth.isAuthenticated, homeRoutes);
+
 //Get Index Page before authentication and authorization
 app.get('/', auth.isAuthenticated, (req, res, next) => {
   res.render('index', {pageTitle: 'Home'});
