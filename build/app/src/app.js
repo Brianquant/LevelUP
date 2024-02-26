@@ -8,7 +8,7 @@ var port = 3333;
 
 //Datenbank Connection
 var con = mysql.createConnection({
-  host: "localhost",
+  host: "mysql",
   user: "root",
   password: "l3v3lup",
   database: "levelup"
@@ -51,7 +51,7 @@ app.use('/', signupRoutes);
 const profileRoutes = require('./routes/profile-routes');
 app.use('/', auth.isAuthenticated, profileRoutes);
 
-const coursesRoutes = require('./routes/course-routes');
+const coursesRoutes = require('./routes/courses-routes');
 app.use('/', auth.isAuthenticated , coursesRoutes);
 
 const singleCourseRoutes = require('./routes/single-course-routes');
