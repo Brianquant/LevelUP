@@ -63,6 +63,13 @@ const homeRoutes = require('./routes/home-routes');
 app.use('/', auth.isAuthenticated, homeRoutes);
 >>>>>>> c9a307c (Zwischenstand: added homepage :: added welcome sec and course sec)
 
+const coursesRoutes = require('./routes/courses-routes');
+app.use('/', auth.isAuthenticated , coursesRoutes);
+
+const singleCourseRoutes = require('./routes/single-course-routes');
+app.use('/', auth.isAuthenticated , singleCourseRoutes);
+
+
 //Get Index Page before authentication and authorization
 app.get('/', auth.isAuthenticated, (req, res, next) => {
   res.render('index', {pageTitle: 'Home'});
