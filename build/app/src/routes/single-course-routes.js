@@ -10,7 +10,7 @@ router.get('/single-course', async (req, res) => {
   res.render('single-course', {pageTitle: "Single-Course", user: userData, courses: courseData, query: req.query });
 });
 
-// Login route
+// Single Course route
 router.post('/single-course', async (req, res) => {
 
 });

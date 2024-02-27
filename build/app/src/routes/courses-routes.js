@@ -11,7 +11,7 @@ router.get('/courses', async (req, res) => {
   res.render('courses', { kursData: courseData, pageTitle: "Courses Overview", loggedInUserId: req.session.user.user_id });
 });
 
-// Login route
+// Course Overview route
 router.post('/courses', async (req, res) => {
 
 });
