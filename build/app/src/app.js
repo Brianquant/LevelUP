@@ -97,7 +97,7 @@ app.get('/highscore', auth.isAuthenticated, function (req, res) {
   //Get Lootbox Page
   app.get('/lootbox', function(req, res) {
     if(req.query.type){
-    var itemsQuery = "SELECT * FROM item WHERE seltenheit = '" + req.query.type + "';";
+    var itemsQuery = "SELECT * FROM item JOIN lootbox USING(lootbox_id) WHERE seltenheit = '" + req.query.type + "';";
     con.query(itemsQuery, function(err, items) { //Select all items which can appear in selected lootbox
       if (err) throw err;
       res.json(items); //Send received data
@@ -120,7 +120,7 @@ app.get('/highscore', auth.isAuthenticated, function (req, res) {
 
   app.get('/lootbox/open', function(req, res){
     const user_id = req.session.user.user_id;
-    var itemsQuery = "SELECT * FROM item WHERE seltenheit = '" + req.query.lootboxType + "';";
+    var itemsQuery = "SELECT * FROM item JOIN lootbox USING(lootbox_id) WHERE seltenheit = '" + req.query.lootboxType + "';";
     con.query(itemsQuery, function(err, items) { //Get all items which can appear in the opened lootbox
       if (err) throw err;
       var randomNumber = Math.floor(Math.random() * items.length); //Get a random number to randomly select an item
@@ -140,14 +140,14 @@ app.get('/highscore', auth.isAuthenticated, function (req, res) {
   const sortParam = req.query.sort || "Älteste - Neuste";
   if(sortParam == 'Seltenheit') { //change query depending on the sortParam
     var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit, anzahl " +
-                    "FROM levelup.benutzer_item JOIN item USING(item_id) WHERE user_id = '"+ user_id + "' ORDER BY seltenheit;";
+                    "FROM benutzer_item RIGHT JOIN item USING(item_id) LEFT JOIN lootbox USING(lootbox_id) WHERE user_id = '"+ user_id + "' ORDER BY seltenheit;";
   }else if(sortParam == 'Name') {
     var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit, anzahl " +
-                    "FROM levelup.benutzer_item JOIN item USING(item_id) WHERE user_id = '"+ user_id + "' ORDER BY bezeichnung;";
+                    "FROM benutzer_item RIGHT JOIN item USING(item_id) LEFT JOIN lootbox USING(lootbox_id) WHERE user_id = '"+ user_id + "' ORDER BY bezeichnung;";
   }
   else{
     var itemQuery = "SELECT bezeichnung, beschreibung, seltenheit, anzahl " +
-                    "FROM levelup.benutzer_item JOIN item USING(item_id) WHERE user_id = '"+ user_id + "'";
+                    "FROM benutzer_item RIGHT JOIN item USING(item_id) LEFT JOIN lootbox USING(lootbox_id) WHERE user_id = '"+ user_id + "'";
   }
   
   con.query(itemQuery, function(err, result){ //Get all items the user owns from the database
