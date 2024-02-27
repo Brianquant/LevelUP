@@ -140,7 +140,7 @@ DROP TABLE IF EXISTS `klasse`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `klasse` (
   `klasse_id` int NOT NULL AUTO_INCREMENT,
-  `bezeichnung` varchar(45) DEFAULT NULL,
+  `klassen_bezeichnung` varchar(45) DEFAULT NULL,
   `klassenlehrer` varchar(45) DEFAULT NULL,
   `secret` varchar(90) DEFAULT NULL,
   PRIMARY KEY (`klasse_id`)
@@ -195,6 +195,7 @@ CREATE TABLE `kurs` (
   `kurs_id` int NOT NULL AUTO_INCREMENT,
   `bezeichnung` varchar(45) DEFAULT NULL,
   `anz_der_klausuren` int DEFAULT NULL,
+  `intro` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`kurs_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -205,7 +206,7 @@ CREATE TABLE `kurs` (
 
 LOCK TABLES `kurs` WRITE;
 /*!40000 ALTER TABLE `kurs` DISABLE KEYS */;
-INSERT INTO `kurs` VALUES (1,'Mathematik I',2),(2,'Informatik Grundkurs',1),(3,'Englisch für Fortgeschrittene',3),(4,'Biologie Basics',2),(5,'Geschichte der Kunst',1),(6,'Chemie für Einsteiger',2),(7,'Physik für Nichtphysiker',1),(8,'Literatur und Kreatives Schreiben',3),(9,'Einführung in die Wirtschaft',2),(10,'Musikgeschichte',1),(11,'Erdkunde für Weltreisende',2),(12,'Psychologie 101',1),(13,'Programmieren in Java',3),(14,'Politik und Gesellschaft',2),(15,'Filmgeschichte',1),(16,'Philosophie für Einsteiger',2),(17,'Kochen leicht gemacht',1),(18,'Sport und Fitness',2),(19,'Schauspielkunst',1),(20,'Astrophysik für Neugierige',3);
+INSERT INTO `kurs` VALUES (1,'Mathematik I',2,'Grundlagen der Mathematik und einführende Konzepte'),(2,'Informatik Grundkurs',1,'Grundlagen der Informatik und einführende Konzepte'),(3,'Englisch für Fortgeschrittene',3,'Verbessern Sie Ihre Englischkenntnisse mit fortgeschrittenen Themen'),(4,'Biologie Basics',2,'Grundlagen der Biologie und einführende Konzepte'),(5,'Geschichte der Kunst',1,'Interessante Einblicke in die Geschichte der Kunst'),(6,'Chemie für Einsteiger',2,'Grundlagen der Chemie und einführende Konzepte'),(7,'Physik für Nichtphysiker',1,'Grundlagen der Physik und einführende Konzepte'),(8,'Literatur und Kreatives Schreiben',3,'Grundlagen der Literatur und kreatives Schreiben'),(9,'Einführung in die Wirtschaft',2,'Grundlagen der Wirtschaft und einführende Konzepte'),(10,'Musikgeschichte',1,'Interessante Musikgeschichte und vieles mehr'),(11,'Erdkunde für Weltreisende',2,'intro...'),(12,'Psychologie 101',1,'intro...'),(13,'Programmieren in Java',3,'intro...'),(14,'Politik und Gesellschaft',2,'intro...'),(15,'Filmgeschichte',1,'intro...'),(16,'Philosophie für Einsteiger',2,'intro...'),(17,'Kochen leicht gemacht',1,'intro...'),(18,'Sport und Fitness',2,'intro...'),(19,'Schauspielkunst',1,'intro...'),(20,'Astrophysik für Neugierige',3,'intro...');
 /*!40000 ALTER TABLE `kurs` ENABLE KEYS */;
 UNLOCK TABLES;
 

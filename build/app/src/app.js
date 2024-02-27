@@ -3,7 +3,6 @@ var mysql = require('mysql2');
 var ejs = require('ejs');
 var bodyParser = require('body-parser');
 var expressLayouts = require('express-ejs-layouts');
-
 var app = express();
 var port = 3333;
 
@@ -52,17 +51,17 @@ app.use('/', signupRoutes);
 const profileRoutes = require('./routes/profile-routes');
 app.use('/', auth.isAuthenticated, profileRoutes);
 
+const coursesRoutes = require('./routes/courses-routes');
+app.use('/', auth.isAuthenticated , coursesRoutes);
+
+const singleCourseRoutes = require('./routes/single-course-routes');
+app.use('/', auth.isAuthenticated , singleCourseRoutes);
+
+
 //Get Index Page before authentication and authorization
 app.get('/', auth.isAuthenticated, (req, res, next) => {
   res.render('index', {pageTitle: 'Home'});
 });
-
-//Get Kurse Page
-app.get('/kurse', (req, res, next) => {
-  res.render('kurse', {pageTitle: "Kurse"});
-});
-
-////Authentication implementation end
 
 //Get Highscore Page
 app.get('/highscore', auth.isAuthenticated, function (req, res) {
@@ -161,3 +160,5 @@ app.get('/highscore', auth.isAuthenticated, function (req, res) {
   app.listen(port, function () {
     console.log("Server is running on port " + port);
   });
+
+module.exports = con;
