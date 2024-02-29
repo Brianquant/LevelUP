@@ -315,6 +315,15 @@ LOCK TABLES `verspaetung` WRITE;
 /*!40000 ALTER TABLE `verspaetung` ENABLE KEYS */;
 UNLOCK TABLES;
 
+INSERT INTO `verspaetung` (`zeitpunkt`, `user_id`, `entschuldigt`) VALUES
+('2024-02-27 08:00:00', 2, 1),
+('2024-02-27 09:00:00', 2, 5),
+('2024-02-28 08:30:00', 2, 6),
+
+('2024-02-27 08:15:00', 3, 0),
+('2024-02-27 09:15:00', 3, 1),
+('2024-02-28 08:45:00', 3, 1);
+
 --
 -- Dumping routines for database 'levelup'
 --
