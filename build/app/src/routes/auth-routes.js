@@ -19,9 +19,9 @@ router.post('/login', async (req, res) => {
 
     // Fetch user from the database
     const [user] = await connection.query('SELECT * FROM benutzer WHERE username = ?', [username]);
-    console.log('SELECT * FROM benutzer WHERE username = ?', [username]);
+    //console.log('SELECT * FROM benutzer WHERE username = ?', [username]);
     const [grade] = await connection.query('SELECT * FROM klasse WHERE klasse_id = ?', [user[0].klasse_id]);
-    console.log(grade);
+    //console.log(grade);
     
     // Close the connection
     connection.release();
@@ -41,7 +41,7 @@ router.post('/login', async (req, res) => {
         teacher: grade[0].klassenlehrer,
         role: user[0].rolle,
       }
-      console.log('Session Data:', req.session);
+      //console.log('Session Data:', req.session);
       
       res.status(200).json({ message: 'Login successful' });
     }
