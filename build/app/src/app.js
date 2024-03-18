@@ -8,7 +8,7 @@ var port = 3333;
 
 //Datenbank Connection
 var con = mysql.createConnection({
-  host: "mysql",
+  host: "localhost",
   user: "root",
   password: "l3v3lup",
   database: "levelup"
@@ -51,12 +51,17 @@ app.use('/', signupRoutes);
 const profileRoutes = require('./routes/profile-routes');
 app.use('/', auth.isAuthenticated, profileRoutes);
 
+<<<<<<< HEAD
 const coursesRoutes = require('./routes/courses-routes');
 app.use('/', auth.isAuthenticated , coursesRoutes);
 
 const singleCourseRoutes = require('./routes/single-course-routes');
 app.use('/', auth.isAuthenticated , singleCourseRoutes);
 
+=======
+const homeRoutes = require('./routes/home-routes');
+app.use('/', auth.isAuthenticated, homeRoutes);
+>>>>>>> c9a307c (Zwischenstand: added homepage :: added welcome sec and course sec)
 
 //Get Index Page before authentication and authorization
 app.get('/', auth.isAuthenticated, (req, res, next) => {
