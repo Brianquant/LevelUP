@@ -11,7 +11,7 @@ Leistungsbewertung in der Schule - XP basiert (OSZIMT)
 
 **Hinweis:** Diese Art und Weise beide Container zu bauen, eigent sich für das testen der User Interface Ebene. Änderungen die am Code auf der Applikationsebene gemacht werden sind nicht sichtbar, dafür eignet sich die Development Mode Angehensweise.
 
-1. Führe folgenden Befehl aus, um die Applikation Lokal zum laufen zu bekommen: `docker compose up --build` im Projektverzeichnis.
+1. Führe folgenden Befehl aus, um die Applikation Lokal auszuführen: `docker compose up --build` im Projektverzeichnis.
 2. Die Applikation ist unter `localhost:3333` erreichbar.
 ## Was wird benötigt:
 -	Website mit einem Levelsystem (max. LVL 50 pro Lernfeld).
