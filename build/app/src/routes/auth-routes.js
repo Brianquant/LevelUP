@@ -37,11 +37,11 @@ router.post('/login', async (req, res) => {
         username: user[0].username,
         firstname: user[0].vorname,
         lastname: user[0].name,
-        grade: grade[0].bezeichnung,
+        grade: grade[0].klassen_bezeichnung,
         teacher: grade[0].klassenlehrer,
         role: user[0].rolle,
       }
-      console.log('Session User Data:', req.session.user);
+      //console.log('Session User Data:', req.session.user);
       
       res.status(200).json({ message: 'Login successful' });
     }
