@@ -41,7 +41,7 @@ router.post('/login', async (req, res) => {
         teacher: grade[0].klassenlehrer,
         role: user[0].rolle,
       }
-      //console.log('Session Data:', req.session);
+      console.log('Session User Data:', req.session.user);
       
       res.status(200).json({ message: 'Login successful' });
     }
