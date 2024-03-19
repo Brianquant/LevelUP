@@ -60,11 +60,6 @@ app.use('/', auth.isAuthenticated , singleCourseRoutes);
 const homeRoutes = require('./routes/home-routes');
 app.use('/', auth.isAuthenticated, homeRoutes);
 
-const coursesRoutes = require('./routes/courses-routes');
-app.use('/', auth.isAuthenticated , coursesRoutes);
-
-const singleCourseRoutes = require('./routes/single-course-routes');
-app.use('/', auth.isAuthenticated , singleCourseRoutes);
 
 //Get Highscore Page
 app.get('/highscore', auth.isAuthenticated, function (req, res) {
