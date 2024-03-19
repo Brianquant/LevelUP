@@ -51,17 +51,14 @@ app.use('/', signupRoutes);
 const profileRoutes = require('./routes/profile-routes');
 app.use('/', auth.isAuthenticated, profileRoutes);
 
-<<<<<<< HEAD
 const coursesRoutes = require('./routes/courses-routes');
 app.use('/', auth.isAuthenticated , coursesRoutes);
 
 const singleCourseRoutes = require('./routes/single-course-routes');
 app.use('/', auth.isAuthenticated , singleCourseRoutes);
 
-=======
 const homeRoutes = require('./routes/home-routes');
 app.use('/', auth.isAuthenticated, homeRoutes);
->>>>>>> c9a307c (Zwischenstand: added homepage :: added welcome sec and course sec)
 
 const coursesRoutes = require('./routes/courses-routes');
 app.use('/', auth.isAuthenticated , coursesRoutes);
