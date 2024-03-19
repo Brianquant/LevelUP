@@ -39,7 +39,7 @@ router.post('/profil', async (req, res) => {
             username: userData.newUserName,
             firstname: user[0].vorname,
             lastname: user[0].name,
-            grade: grade[0].bezeichnung,
+            grade: grade[0].klassen_bezeichnung,
             teacher: grade[0].klassenlehrer,
             role: user[0].rolle,
           }
@@ -76,7 +76,7 @@ router.post('/profil', async (req, res) => {
             username: userData.newUserName,
             firstname: user[0].vorname,
             lastname: user[0].name,
-            grade: grade[0].bezeichnung,
+            grade: grade[0].klassen_bezeichnung,
             teacher: grade[0].klassenlehrer,
             role: user[0].rolle,
           }
